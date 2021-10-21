@@ -5,6 +5,7 @@ import { ListaEspecialistasComponent } from './Componentes/lista-especialistas/l
 import { LoginComponent } from './Componentes/login/login.component';
 import { RegistroComponent } from './Componentes/registro/registro.component';
 import { VerificarEmailComponent } from './Componentes/verificar-email/verificar-email.component';
+import { PuedoVerGuard } from './puedo-ver.guard';
 import { UsuariosModule } from './usuarios/usuarios.module';
 
 const routes: Routes = [
@@ -13,7 +14,7 @@ const routes: Routes = [
   {path: 'login', component:LoginComponent},
   {path: 'registro', component:RegistroComponent},
   {path: 'verificarEmail', component:VerificarEmailComponent},
-  {path: 'Usuarios', loadChildren:()=>import('./usuarios/usuarios.module').then(m => UsuariosModule)},
+  {path: 'Usuarios', loadChildren:()=>import('./usuarios/usuarios.module').then(m => UsuariosModule), canActivate:[PuedoVerGuard]},
 ];
 
 @NgModule({
