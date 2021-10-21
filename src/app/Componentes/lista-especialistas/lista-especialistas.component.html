@@ -1,0 +1,33 @@
+<div class="container">
+<h1>
+    Listado de Especialistas
+</h1>
+<table class="table table-danger table-striped">
+    <thead>
+        <tr class="table-danger">
+          <th scope="col">Index</th>
+          <th scope="col">Nombre</th>
+          <th scope="col">Apellido</th>
+          <th scope="col">Especialidad</th>
+          <th scope="col">Habilitado</th>
+        </tr>
+      </thead>
+      <tbody *ngFor="let especialista of listaEspecialistas; index as i" >
+        <tr>
+          <th>{{i+1}}</th>
+          <td>{{especialista.Nombre}}</td>
+          <td>{{especialista.Apellido}}</td>
+          <td>{{especialista.Especialidad}}</td>
+          <td>
+            <button *ngIf="especialista.Aprobado" class="btn btn-sm btn-danger" (click)="UpdateEstado(especialista.Id, false)">
+              DESHABILITAR
+            </button>
+            <button *ngIf="!especialista.Aprobado"  class="btn btn-sm btn-success" (click)="UpdateEstado(especialista.Id, true)">
+              HABILITAR
+            </button>
+          </td>
+        </tr>
+       
+      </tbody>
+  </table>
+</div>

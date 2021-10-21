@@ -1,0 +1,24 @@
+<nav class="navbar navbar-light bg-danger sticky-top" >
+    <div class="container-fluid">
+      <a class="navbar-brand" >
+        <img src="../../../assets/clinica.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
+        Clínica
+      </a>
+      <a class="navbar-brand" *ngIf="!isLogued" (click)="Login()">        
+        Login
+      </a>
+      <a class="navbar-brand" (click)="RegistroPyE()">       
+        Registro Especialistas y Pacientes
+      </a>
+     
+        <a *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="AltaUsuario()">       
+            Registro Administradores
+          </a>
+          <a *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="ListaEspecialistas()">       
+            Lista Especialistas
+          </a>
+          <a *ngIf="isLogued" class="navbar-brand" (click)="Salir()">       
+            Salir
+          </a>
+    </div>
+  </nav>
