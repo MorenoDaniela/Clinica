@@ -21,6 +21,17 @@ import { ListaEspecialistasComponent } from './Componentes/lista-especialistas/l
 import { AltaUsuarioComponent } from './Componentes/alta-usuario/alta-usuario.component';
 import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { AngularFireModule } from '@angular/fire/compat';
+import { HideShowNavDirective } from './hide-show-nav.directive';
+import { IndexRegistroComponent } from './Componentes/index-registro/index-registro.component';
+import { RegistroPacienteComponent } from './Componentes/registro-paciente/registro-paciente.component';
+import { SolicitarTurnoComponent } from './Componentes/solicitar-turno/solicitar-turno.component';
+import { MiPerfilComponent } from './Componentes/mi-perfil/mi-perfil.component';
+import { MisTurnosPacienteComponent } from './Componentes/mis-turnos-paciente/mis-turnos-paciente.component';
+import { MisTurnosEspecialistaComponent } from './Componentes/mis-turnos-especialista/mis-turnos-especialista.component';
+import { TurnosComponent } from './Componentes/turnos/turnos.component';
+import { DetalleEspecialidadComponent } from './Componentes/detalle-especialidad/detalle-especialidad.component';
+import { ButtonsEspecialistasComponent } from './Componentes/buttons-especialistas/buttons-especialistas.component';
+import { DetalleEspecialistaComponent } from './Componentes/detalle-especialista/detalle-especialista.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +44,18 @@ import { AngularFireModule } from '@angular/fire/compat';
     AltaEspecialidadComponent,
     ListaEspecialidadComponent,
     ListaEspecialistasComponent,
-    AltaUsuarioComponent
+    AltaUsuarioComponent,
+    HideShowNavDirective,
+    IndexRegistroComponent,
+    RegistroPacienteComponent,
+    SolicitarTurnoComponent,
+    MiPerfilComponent,
+    MisTurnosPacienteComponent,
+    MisTurnosEspecialistaComponent,
+    TurnosComponent,
+    DetalleEspecialidadComponent,
+    ButtonsEspecialistasComponent,
+    DetalleEspecialistaComponent
   ],
   imports: [
     BrowserModule,

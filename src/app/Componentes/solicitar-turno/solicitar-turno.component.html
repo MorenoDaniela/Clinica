@@ -1,0 +1,68 @@
+<div class="form-control" style="margin:auto">
+  <form [formGroup]="formulario" (ngSubmit)="aceptar()">     
+    <div class="col-md-7 col-lg-8">
+        <h4 class="mb-3">Sacar turno</h4> 
+      
+          <div class="row g-3">
+            <!-- <div class="col-sm-12">
+              <label class="form-label">Especialidad</label>
+             
+              <select class="custom-select custom-select-lg form-control "  (change)="buscarEspecialistas()">
+                <option selected value="" >
+                    Seleccione
+                </option>
+                <option *ngFor="let especialidad of listaEspecialidades" >
+                    {{especialidad}} 
+                    </option>
+              </select>
+    
+            </div> -->
+            <app-lista-especialidad (eventoEspecialidadSeleccionada)="pasoEspecialidadADetalle($event)" ></app-lista-especialidad>
+            <span class="text-danger" *ngIf="formulario.get('EspecialidadSeleccionada')?.hasError('required') && formulario.get('EspecialidadSeleccionada')?.touched">La especialidad es requerida.</span>
+            <app-detalle-especialidad [EspecialidadAMostrar]="EspecialidadSeleccionada" >
+              
+            </app-detalle-especialidad>
+            <!-- <div class="col-sm-12">
+              <label for="lastName" class="form-label">Especialista</label>
+              <select class="custom-select custom-select-lg form-control" >
+                <option selected value="" >
+                    Seleccione
+                </option>
+                <option *ngFor="let especialista of listaEspecialistas" >
+                    {{especialista.Nombre}} {{especialista.Apellido}}
+                    </option>
+            </select>
+          </div> -->
+            <app-buttons-especialistas (eventoEspecialistaSeleccionado)="pasoEspecialistaADetalle($event)" [EspecialidadAMostrar]="EspecialidadSeleccionada" ></app-buttons-especialistas>
+            <span class="text-danger" *ngIf="formulario.get('Especialista')?.hasError('required') && formulario.get('Especialista')?.touched">El especialista es requerido.</span>
+            <app-detalle-especialista [EspecialistaAMostrar]="EspecialistaSeleccionado" ></app-detalle-especialista>
+            
+           
+            <div class="col-sm-12 ">
+                <!-- <label for="username" class="form-label">Fecha del turno</label>                -->
+                <label> Fecha del turno:
+                    <input type="date" class="form-control" formControlName="Fecha"/>
+                </label>
+                <span class="text-danger" *ngIf="formulario.get('Fecha')?.hasError('estaMal') && formulario.get('Fecha')?.touched">La fecha minima es hoy y la máxima 15 dias despues.</span>
+                <span class="text-danger" *ngIf="formulario.get('Fecha')?.hasError('required') && formulario.get('Fecha')?.touched">La fecha es requerida.</span>
+               
+                <!-- <label>(DD-MM-YYYY):
+                    <input type="text"  class="form-control" pattern="[0-9]{2}-[0-9]{2}-[0-9]{4}" />
+                    </label> -->
+            </div>
+            <!-- <span class="text-muted">(Optional)</span> -->
+            <div class="col-sm-12">
+              <label >Hora 
+                <input type="time" class="without_ampm form-control" formControlName="Hora">
+              </label>
+              <!-- <span class="text-danger" *ngIf="formulario.get('Hora')?.hasError('estaMal') && formulario.get('Fecha')?.touched">La fecha minima es hoy y la máxima 15 dias despues.</span> -->
+              <span class="text-danger" *ngIf="formulario.get('Hora')?.hasError('required') && formulario.get('Hora')?.touched">La hora es requerida.</span>               
+            </div>
+            
+            
+          </div>    
+        
+          <button class="w-100 btn btn-primary btn-lg" type="submit" [disabled]="formulario.invalid" >Pedir Turno</button>
+    </div>
+  </form>
+</div>

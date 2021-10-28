@@ -5,13 +5,13 @@
                 <div class="card1 pb-5">
                     <div class="row"> <img src="../../../assets/clinica.png" class="logo"> </div>
                     <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="../../../assets/doctor.png" class="image"> </div>
-                    <app-alta-especialidad  class="row px-3 justify-content-center mt-4 mb-5 border-line"></app-alta-especialidad>
+                    <!-- <app-alta-especialidad *ngIf="formulario.value.TipoUsuario == 'Especialista'" class="row px-3 justify-content-center mt-4 mb-5 border-line"></app-alta-especialidad> -->
                 </div>
             </div>
             <div class="col-lg-6">
                 <div class="card2 card border-0 px-4 py-5">
                     <div class="row mb-4 px-3">
-                        <h6 class="mb-0 mr-4 mt-2">Registro de Especialistas</h6>                      
+                        <h6 class="mb-0 mr-4 mt-2">Registro de Pacientes</h6>                      
                     </div>
                     <form [formGroup]="formulario" (ngSubmit)="aceptar()">
 
@@ -71,16 +71,16 @@
                            
                         </div>
 
-                        <!-- <div class="row px-3" *ngIf="formulario.value.TipoUsuario == 'Paciente'"> 
+                         <div class="row px-3" > 
                             <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Obra Social</h6>
                             </label> 
                             <input class="mb-4" type="text" formControlName="ObraSocial">
-                            <span class="text-danger" *ngIf="formulario.get('ObraSocial')?.hasError('ObraSocialMal') && formulario.get('ObraSocial')?.touched">La obra social es requerida.</span>
-                            
+                            <!-- <span class="text-danger" *ngIf="formulario.get('ObraSocial')?.hasError('ObraSocialMal') && formulario.get('ObraSocial')?.touched">La obra social es requerida.</span>
+                              -->
                               <span class="text-danger" *ngIf="formulario.get('ObraSocial')?.hasError('required') && formulario.get('ObraSocial')?.touched">La obra social es requerida.</span>
                        
-                            </div>  -->
+                            </div>
                          <div class="row"> 
                              <div class="col px-3">
                                 <label class="mb-1">
@@ -90,23 +90,23 @@
                                 <span class="text-danger" *ngIf="formulario.get('Imagen1')?.hasError('required') && formulario.get('Imagen1')?.touched">La imagen es requerida.</span>
                            
                              </div>
-                                <!-- <div class="col px-3" *ngIf="formulario.value.TipoUsuario == 'Paciente'">
+                                <div class="col px-3" >
                                     <label class="mb-1">
                                         <h6 class="mb-0 text-sm">Imagen de perfil 2</h6>
                                     </label> 
                                     <input class="mb-4" type="file" (input)="onFileChanged2($event)" formControlName="Imagen2">
                                     <span class="text-danger" *ngIf="formulario.get('Imagen2')?.hasError('required') && formulario.get('Imagen2')?.touched">La imagen es requerida.</span>
                                    
-                                </div> -->
+                                </div>
                             </div>
                         <!--<app-alta-especialidad>-->
                            
                             
-                         <div class="row px-3 " > 
+                         <!-- <div class="row px-3 " *ngIf="formulario.value.TipoUsuario == 'Especialista'"> 
                             <label class="mb-1">
                                 <h6 class="mb-0 text-sm">Especialidad</h6>
                             </label> 
-                            <select class="custom-select custom-select-lg form-control " multiple formControlName="Especialidad">
+                            <select class="custom-select custom-select-lg form-control" formControlName="Especialidad">
                                 <option selected value="">
                                     Seleccione
                                 </option>
@@ -116,7 +116,7 @@
                             </select>
                             <span class="text-danger" *ngIf="formulario.get('Especialidad')?.hasError('required') && formulario.get('Especialidad')?.touched">La especialidad es requerida.</span>
                            
-                         </div> 
+                         </div>  -->
                            <!-- este solo si especialista -->
                         <div class="row">
                             <div class="col px-3">
@@ -147,3 +147,4 @@
         </div>       
     </div>
 </div>
+

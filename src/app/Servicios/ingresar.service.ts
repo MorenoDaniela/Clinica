@@ -21,6 +21,17 @@ export class IngresarService{
   public verificado!:boolean;
   public tipoUsuario!:string;
   public estaAprobado!:boolean;
+  public Nombre!: string;
+  public Apellido!: string;
+  public Edad!: number;
+  public DNI!: number;
+  public ObraSocial!: string;
+  public Email!: string;
+  public Password!: string;
+  public ImagenUno!: string; //una sola imagen para especialistas
+  public ImagenDos!: string;
+  public Especialidad!: string; //solo especialistas
+  public Id!:string;
   private usuarios:string = '/usuarios';
   public Usuario: Usuario = new Usuario();
   public subscripcion:any;
@@ -57,17 +68,33 @@ export class IngresarService{
     data.map((us: any) =>{ 
       this.tipoUsuario = us.payload.doc.data().TipoUsuario;
       this.estaAprobado = us.payload.doc.data().Aprobado;
+      this.Nombre = us.payload.doc.data().Nombre;
+      this.Apellido = us.payload.doc.data().Apellido;
+      this.DNI = us.payload.doc.data().DNI;
+      this.ImagenDos = us.payload.doc.data().ImagenDos;
+      this.ImagenUno = us.payload.doc.data().ImagenUno;
+      this.ObraSocial = us.payload.doc.data().ObraSocial;
+      this.Especialidad = us.payload.doc.data().Especialidad;
       this.verificado = result.user?.emailVerified;
+      this.Edad = us.payload.doc.data().Edad;
       console.log("verificado: "+ this.verificado);
       if (this.tipoUsuario=="Administrador" || (this.verificado && this.tipoUsuario=="Paciente") || 
       (this.verificado && this.tipoUsuario=="Especialista" && this.estaAprobado==true))
       {
         NavComponent.updateUserStatus.next(true);  
-        this.Usuario.Id = result.user!.uid;
+        this.Usuario.Id = us.payload.doc.id;
         this.Usuario.Email = email;
         this.Usuario.TipoUsuario= this.tipoUsuario;
         this.Usuario.EstaLogueado=true;
         this.Usuario.Aprobado=this.estaAprobado;
+        this.Usuario.DNI=this.DNI;
+        this.Usuario.Edad=this.Edad;
+        this.Usuario.Nombre=this.Nombre;
+        this.Usuario.Apellido=this.Apellido;
+        this.Usuario.ImagenDos=this.ImagenDos;
+        this.Usuario.ImagenUno=this.ImagenUno;
+        this.Usuario.ObraSocial=this.ObraSocial;
+        this.Usuario.Especialidad=this.Especialidad;
         localStorage.setItem('usuarioApp',JSON.stringify(this.Usuario));                        
         this.toastr.showExito("Logueo exitoso.","Te logueaste", 3000);                
         this.router.navigate(['bienvenido']);
@@ -94,10 +121,21 @@ export class IngresarService{
   ).subscribe(); 
  }
 
-getUsuario(email:string):AngularFirestoreCollection<Usuario>
+getUsuario(email:string):any
 {
   return this.db.collection("usuarios", ref => ref.where('Email', '==', email));
+}
 
+getId(email:string):any{
+  this.db.collection("usuarios", ref => ref.where('Email', '==', email)).snapshotChanges().pipe(
+    map( (data: any) => {
+      data.map((usuario: any) =>{
+        console.log(usuario.payload.doc.id);
+        return usuario.payload.doc.id;
+      })
+    })
+  ).subscribe((datos: any) => {
+  });
 }
   registroWithEmailAndPassword(email:string,pass:string, Nombre: string, Apellido: string,Edad: number, DNI: number,
     ObraSocial: string, ImagenUno: string, ImagenDos: string, TipoUsuario: string,
@@ -208,6 +246,12 @@ getUsuario(email:string):AngularFirestoreCollection<Usuario>
   {
     console.log(id +""+ update);
   this.db.collection("usuarios").doc(id).update({Aprobado: update})
+  }
+
+  UpdateMishorarios(id:string, mishorarios:any)
+  {
+    console.log(id +""+ mishorarios);
+  this.db.collection("usuarios").doc(id).update({Mishorarios: mishorarios})
   }
  
 }

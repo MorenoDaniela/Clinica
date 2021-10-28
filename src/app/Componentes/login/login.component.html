@@ -3,8 +3,25 @@
         <div class="row d-flex">
             <div class="col-lg-6">
                 <div class="card1 pb-5">
-                    <div class="row"> <img src="../../../assets/clinica.png" class="logo"> </div>
-                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line"> <img src="../../../assets/doctor.png" class="image"> </div>
+                    <!-- <div class="row"> <img src="../../../assets/clinica.png" class="logo"> </div> -->
+                    <div class="row px-3 justify-content-center mt-4 mb-5 border-line" >
+                        <button class="col text-center" (click)="logUser(ad.Email,ad.Password)" *ngFor="let ad of arrayUsuarios; index as i" style="position: relative;padding: auto;border-color: rgb(213, 51, 30);">
+                            <span class=""style="bottom: 20px;
+                            right: 20px;
+                            /* background-color:red; */
+                            color: red;
+                            padding-left: 20px;
+                            padding-right: 20px;">{{ad.Nombre}}</span>
+                            <img src="{{ad.ImagenUno}}" style="width: 200px; height: 200px; " >
+                            <span class=""style="bottom: 20px;
+                            right: 20px;
+                            background-color:red;
+                            color: white;
+                            padding-left: 20px;
+                            padding-right: 20px;">{{ad.TipoUsuario}}</span>
+                            <!-- <span style="position: absolute;">{{ad.TipoUsuario}}</span> -->
+                        </button>
+                    </div>
                 </div>
             </div>
             <div class="col-lg-6">
@@ -27,7 +44,7 @@
                         </div> 
                         <a href="#" class="ml-auto mb-0 text-sm">¿Te olvidaste la contraseña?</a>
                     </div> -->
-                    <div class="row mb-3 px-3">
+                    <!-- <div class="row mb-3 px-3">
                         <div class="col">
                             <button class="btn btn-success" (click)="admin()">ADMIN</button>
                                
@@ -41,7 +58,7 @@
                            
                             <button class="btn btn-primary" (click)="especialista()">ESPECIALISTA</button>        
                         </div>
-                    </div>
+                    </div> -->
                     <div class="row mb-3 px-3"> <button type="submit" (click)="Loguear()" class="btn btn-blue text-center">Entrar</button> </div>
                     <div class="row mb-4 px-3" (click)="aRegistro()"> <small class="font-weight-bold">¿No tenes una cuenta? <a class="text-danger ">Registrate</a></small> </div>
                 </div>

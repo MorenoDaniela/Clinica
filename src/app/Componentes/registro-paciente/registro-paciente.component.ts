@@ -8,16 +8,12 @@ import { ToasterService } from 'src/app/Servicios/toaster.service';
 import { EspecialidadesService } from 'src/app/Servicios/especialidades.service';
 import { map } from 'rxjs/operators';
 
-
 @Component({
-  selector: 'app-registro',
-  templateUrl: './registro.component.html',
-  styleUrls: ['./registro.component.css']
+  selector: 'app-registro-paciente',
+  templateUrl: './registro-paciente.component.html',
+  styleUrls: ['./registro-paciente.component.css']
 })
-
-
-
-export class RegistroComponent implements OnInit {
+export class RegistroPacienteComponent implements OnInit {
 
   public listadoEspecialidades:any = [];
   public listaEspecialidades:any = [];
@@ -37,8 +33,8 @@ export class RegistroComponent implements OnInit {
   ngOnInit(): void {
     this.buildForm();
     this.validar(this.formulario);
-    this.listadoEspecialidades = this.especialidades.firestore.collection("especialidades", ref => ref.orderBy('nombre'));
-    this.cargarEspecialidades();
+    // this.listadoEspecialidades = this.especialidades.firestore.collection("especialidades", ref => ref.orderBy('nombre'));
+    // this.cargarEspecialidades();
   }
 
   buildForm() {
@@ -48,11 +44,11 @@ export class RegistroComponent implements OnInit {
       Edad:["", [Validators.required, Validators.min(1), Validators.max(100)]],
       // TipoUsuario:["",Validators.required],
       DNI:["", [Validators.required, Validators.min(6000000), Validators.max(70000000), this.validarDNI]],
-      ObraSocial:["", ],
-      Especialidad:[[],],
+      ObraSocial:["", Validators.required],
+      // Especialidad:["",],
       Email:["", [Validators.required, Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$')]],
       Imagen1:["", Validators.required],
-      // Imagen2:["", ],
+      Imagen2:["",Validators.required ],
       Contraseña:["", Validators.required],
       
     })
@@ -60,29 +56,29 @@ export class RegistroComponent implements OnInit {
 
    validar(formulario: FormGroup) {
     // let tipoUsuario = formulario.get('TipoUsuario')?.value;
-    // let ObraSocial = formulario.get('ObraSocial');
-    // let Foto2 = formulario.get('Imagen2');
-    let Especialidad = formulario.get("Especialidad");
+    let ObraSocial = formulario.get('ObraSocial');
+    let Foto2 = formulario.get('Imagen2');
+    // let Especialidad = formulario.get("Especialidad");
   
     formulario.get('TipoUsuario')?.valueChanges
         .subscribe(TipoUsuario => {
   
-        
+          // if (TipoUsuario === 'Especialista') {
             
-            Especialidad?.setValidators([Validators.required]);
-            // ObraSocial?.setValidators(null);
-            // Foto2?.setValidators(null);
-          
-  
-          // if (TipoUsuario === 'Paciente') {
-          //   Especialidad?.setValidators(null);
-          //   // ObraSocial?.setValidators([Validators.required]);
-          //   // Foto2?.setValidators([Validators.required]);
+          //   Especialidad?.setValidators([Validators.required]);
+          //   ObraSocial?.setValidators(null);
+          //   Foto2?.setValidators(null);
           // }
   
-          Especialidad?.updateValueAndValidity();
-          // ObraSocial?.updateValueAndValidity();
-          // Foto2?.updateValueAndValidity();
+          if (TipoUsuario === 'Paciente') {
+            // Especialidad?.setValidators(null);
+            ObraSocial?.setValidators([Validators.required]);
+            Foto2?.setValidators([Validators.required]);
+          }
+  
+          // Especialidad?.updateValueAndValidity();
+          ObraSocial?.updateValueAndValidity();
+          Foto2?.updateValueAndValidity();
         });
     
   }
@@ -94,17 +90,21 @@ export class RegistroComponent implements OnInit {
    const Edad = this.formulario.controls['Edad'].value;
   //  const TipoUsuario = this.formulario.controls['TipoUsuario'].value;
    const DNI = this.formulario.controls['DNI'].value;
-  //  const ObraSocial = this.formulario.controls['ObraSocial'].value;
-   const Especialidad = this.formulario.controls['Especialidad'].value;
+   const ObraSocial = this.formulario.controls['ObraSocial'].value;
+  //  const Especialidad = this.formulario.controls['Especialidad'].value;
    const Email = this.formulario.controls['Email'].value;
    const Contraseña = this.formulario.controls['Contraseña'].value;
    const Imagen1 = this.downloadableURL;
-  //  const Imagen2 = this.downloadableURL2;
+   const Imagen2 = this.downloadableURL2;
+  //  if (TipoUsuario=="Especialista")
+  //  {
+  //   this.authService.registroWithEmailAndPassword(Email,Contraseña, Nombre, Apellido, Edad, DNI, "",Imagen1, "",TipoUsuario,Especialidad,false);
+  //   this.toastr.showExito("Se registro el especialista correctamente","Tus datos fueron enviados con exito.",2000);
+  //  }
+   
+    this.authService.registroWithEmailAndPassword(Email,Contraseña, Nombre, Apellido, Edad, DNI, ObraSocial,Imagen1, Imagen2,"Paciente","",true);
+    this.toastr.showExito("Se registro el paciente correctamente","Tus datos fueron enviados con exito.",2000);
   
-    this.authService.registroWithEmailAndPassword(Email,Contraseña, Nombre, Apellido, Edad, DNI, "",Imagen1, "","Especialista",Especialidad,false);
-    this.toastr.showExito("Se registro el especialista correctamente","Tus datos fueron enviados con exito.",2000);
-   
-   
   
   }
   aRegistro()
@@ -169,5 +169,6 @@ export class RegistroComponent implements OnInit {
   });
  }
 }
+
 
 

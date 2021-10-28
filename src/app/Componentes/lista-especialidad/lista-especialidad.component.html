@@ -1,1 +1,6 @@
 
+
+   <div class="d-inline-block" *ngFor="let especialidad of listaEspecialidades"  (click)="emitirEspecialidad(especialidad)">
+      <input hidden  ngDefaultControl="especialidad">
+<button class="btn btn-outline-danger mr-1" type="button" style="margin: auto;">{{especialidad}} </button>
+   </div>

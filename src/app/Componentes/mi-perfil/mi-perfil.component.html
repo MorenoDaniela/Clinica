@@ -1,0 +1,131 @@
+<div class="container rounded bg-white mt-5 mb-5">
+    <div class="row">
+        <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+                <img class="rounded-circle mt-5" width="150px" src={{user.ImagenUno}}>
+                <span class="font-weight-bold">{{user.Nombre}}</span>
+                <span class="text-black-50">{{user.Email}}</span>
+                <span> </span>
+            </div>
+        </div>
+        <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">Datos del Perfil</h4>
+                </div>
+                <div class="row mt-2">
+                    <div class="col-md-6"><label class="labels">Nombre</label><input type="text" class="form-control"  value="{{user.Nombre}}" readonly></div>
+                    <div class="col-md-6"><label class="labels">Apellido</label><input type="text" class="form-control" value="{{user.Apellido}}" readonly></div>
+                </div>
+                <div class="row mt-3">
+                    <div class="col-md-12"><label class="labels">DNI</label><input type="text" class="form-control"  value="{{user.DNI}}" readonly></div>
+                    <div class="col-md-12"><label class="labels">Edad</label><input type="text" class="form-control"  value="{{user.Edad}}" readonly></div>
+                    <div class="col-md-12" *ngIf="user.TipoUsuario=='Paciente'"><label class="labels">Obra Social</label><input type="text" class="form-control"  value="{{user.ObraSocial}}" readonly></div>
+                    <div class="col-md-12"><label class="labels">Tipo Usuario</label><input type="text" class="form-control"  value="{{user.TipoUsuario}}" readonly></div>
+                    <div class="col-md-12"><label class="labels">Email</label><input type="text" class="form-control"  value="{{user.Email}}" readonly></div>
+                    <div class="col-md-12" *ngIf="user.TipoUsuario=='Especialista'"><label class="labels">Especialidad</label><input type="text" class="form-control" value="{{user.Especialidad}}" readonly></div>
+                    <div class="col-md-12" *ngIf="user.TipoUsuario=='Paciente'">
+                        <label class="labels">Imagen Dos</label>
+                        <img class="rounded-circle mt-5" width="150px" src={{user.ImagenDos}}>
+                    </div>
+                   <!-- <div class="col-md-12"><label class="labels">Education</label><input type="text" class="form-control"  value="" readonly></div> -->
+                </div>
+                <!-- <div class="row mt-3">
+                    <div class="col-md-6"><label class="labels">Country</label><input type="text" class="form-control"  value="" readonly></div>
+                    <div class="col-md-6"><label class="labels">State/Region</label><input type="text" class="form-control" value="" readonly></div>
+                </div> -->
+                <!-- <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="button">Save Profile</button></div> -->
+            </div>
+        </div>
+        <div class="col-md-4" *ngIf="user.TipoUsuario=='Especialista' ">
+            <div class="p-3 py-5" >
+                <div class="d-flex justify-content-between align-items-center experience"><span>Mis horarios</span></div><br>
+                <form [formGroup]="formulario" (ngSubmit)="enviar()">
+                  <div >
+                    <div class="col-md-12" >
+                        <label class="labels">Especialidad</label>
+                        <input type="text" class="form-control"  value="{{user.Especialidad}}" readonly>
+                        <input type="text" hidden class="form-control" value="{{user.Especialidad}}" formControlName="Especialidad">
+                    </div> 
+                   
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="Lunes">
+                        <label class="form-check-label" for="inlineCheckbox1">Lunes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"  formControlName="Martes">
+                        <label class="form-check-label" for="inlineCheckbox2">Martes</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"  formControlName="Miercoles">
+                        <label class="form-check-label" for="inlineCheckbox2">Miercoles</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"  formControlName="Jueves">
+                        <label class="form-check-label" for="inlineCheckbox2">Jueves</label>
+                      </div>
+                      <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox"  formControlName="Viernes">
+                        <label class="form-check-label" for="inlineCheckbox2">Viernes</label>
+                      </div>
+                     
+
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Hora Desde</span>                        
+                        </div>
+                        <input type="number" min="08" max="19" class="form-control" formControlName="Desde">
+                        <span class="text-danger" *ngIf="formulario.get('Desde')?.hasError('min') && formulario.get('Desde')?.touched">La hora minima es 8.</span>
+                        <span class="text-danger" *ngIf="formulario.get('Desde')?.hasError('required') && formulario.get('Desde')?.touched">La hora es requerida.</span>
+                        <span class="text-danger" *ngIf="formulario.get('Desde')?.hasError('max') && formulario.get('Desde')?.touched">La hora máxima es 19.</span>
+                      </div>
+                      
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Hora Hasta</span>                        
+                        </div>
+                        <input type="number" min="08" max="19" class="form-control" formControlName="Hasta">
+                        <span class="text-danger" *ngIf="formulario.get('Hasta')?.hasError('min') && formulario.get('Hasta')?.touched">La hora minima es 8.</span>
+                        <span class="text-danger" *ngIf="formulario.get('Hasta')?.hasError('required') && formulario.get('Hasta')?.touched">La hora es requerida.</span>
+                        <span class="text-danger" *ngIf="formulario.get('Hasta')?.hasError('max') && formulario.get('Hasta')?.touched">La hora máxima es 19.</span>
+                      </div>
+                      
+                       
+                       <div class="form-check form-check-inline">
+                        <input class="form-check-input" type="checkbox" formControlName="Sabado">
+                        <label class="form-check-label" for="inlineCheckbox1">Sábado</label>
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Hora Desde</span>                        
+                        </div>
+                        <input type="number" min="08" max="14" class="form-control" formControlName="DesdeSabado" >
+                        <span class="text-danger" *ngIf="formulario.get('DesdeSabado')?.hasError('min') && formulario.get('DesdeSabado')?.touched">La hora minima es 8.</span>
+                        <span class="text-danger" *ngIf="formulario.get('DesdeSabado')?.hasError('required') && formulario.get('DesdeSabado')?.touched">La hora es requerida.</span>
+                        <span class="text-danger" *ngIf="formulario.get('DesdeSabado')?.hasError('max') && formulario.get('DesdeSabado')?.touched">La hora máxima es 19.</span>
+                     
+                      </div>
+                      <div class="input-group mb-3">
+                        <div class="input-group-prepend">
+                          <span class="input-group-text">Hora Hasta</span>                        
+                        </div>
+                        <input type="number" min="08" max="14"class="form-control" formControlName="HastaSabado">
+                        <span class="text-danger" *ngIf="formulario.get('HastaSabado')?.hasError('min') && formulario.get('HastaSabado')?.touched">La hora minima es 8.</span>
+                        <span class="text-danger" *ngIf="formulario.get('HastaSabado')?.hasError('required') && formulario.get('HastaSabado')?.touched">La hora es requerida.</span>
+                        <span class="text-danger" *ngIf="formulario.get('HastaSabado')?.hasError('max') && formulario.get('HastaSabado')?.touched">La hora máxima es 19.</span>
+                      </div>
+                      <button class="btn btn-success" [disabled]="formulario.invalid"  type="submit">Enviar</button>
+                        
+                    <br>
+                    <!-- <div class="col-md-3"></div> -->
+                </div>
+                </form>
+                
+                
+                
+            </div>
+        </div>
+    </div>
+</div>
+<!-- </div>
+</div> -->

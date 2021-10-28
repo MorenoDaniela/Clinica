@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { EspecialidadesService } from 'src/app/Servicios/especialidades.service';
 import { map } from 'rxjs/operators';
 @Component({
@@ -9,6 +9,7 @@ import { map } from 'rxjs/operators';
 export class ListaEspecialidadComponent implements OnInit {
   public listadoEspecialidades:any = [];
   public listaEspecialidades:any = [];
+  @Output() eventoEspecialidadSeleccionada : EventEmitter<string> = new EventEmitter<string>();
   constructor(public especialidades: EspecialidadesService) { }
 
   ngOnInit(): void {
@@ -32,5 +33,10 @@ export class ListaEspecialidadComponent implements OnInit {
     })
   ).subscribe((datos: any) => {
   });
+ }
+ emitirEspecialidad(especialidad:any)
+ {
+  console.log(especialidad);
+    this.eventoEspecialidadSeleccionada.emit(especialidad);
  }
 }

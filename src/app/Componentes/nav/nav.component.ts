@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { IngresarService } from 'src/app/Servicios/ingresar.service';
 import { Subject } from 'rxjs/internal/Subject';
+
 @Component({
   selector: 'app-nav',
   templateUrl: './nav.component.html',
@@ -12,6 +13,8 @@ export class NavComponent implements OnInit {
   isLogued!:boolean;
   public static updateUserStatus: Subject<boolean> = new Subject();
   isAdmin:boolean=false;
+  isEspecialista:boolean=false;
+  isPaciente:boolean=false;
   constructor(public routes: Router, public ingresarService:IngresarService)
    {
     NavComponent.updateUserStatus.subscribe(res => {
@@ -24,10 +27,9 @@ export class NavComponent implements OnInit {
     if(user!=null)
     {
       this.isLogued=true;
-      if(user.TipoUsuario == "Administrador")
-      {
-        this.isAdmin = true;
-      }
+      if(user.TipoUsuario == "Administrador") this.isAdmin = true;    
+      if(user.TipoUsuario=="Especialista") this.isEspecialista=true;
+      if(user.TipoUsuario=="Paciente") this.isPaciente=true;
     }else
     {
       this.isLogued=false;
@@ -37,11 +39,15 @@ export class NavComponent implements OnInit {
 
   RegistroPyE()
   {
-    this.routes.navigate(["registro"]);
+    this.routes.navigate(["indexRegistro"]);
   }
   Login()
   {
     this.routes.navigate(["login"]);
+  }
+  MiPerfil()
+  {
+    this.routes.navigate(["miPerfil"]);
   }
   AltaUsuario()
   {
@@ -50,6 +56,11 @@ export class NavComponent implements OnInit {
   ListaEspecialistas()
   {
     this.routes.navigate(["Usuarios/Especialistas"]);
+  }
+
+  SolicitarTurno()
+  {
+    this.routes.navigate(['solicitar-turno']);
   }
   Salir()
   {

@@ -7,14 +7,20 @@
       <a class="navbar-brand" *ngIf="!isLogued" (click)="Login()">        
         Login
       </a>
+      <a class="navbar-brand" *ngIf="isLogued" (click)="MiPerfil()">        
+        Mi Perfil
+      </a>
+      <a class="navbar-brand" *ngIf="isLogued && isAdmin || isPaciente" (click)="SolicitarTurno()">        
+        Solicitar Turno
+      </a>
       <a class="navbar-brand" (click)="RegistroPyE()">       
-        Registro Especialistas y Pacientes
+        Registro
       </a>
      
-        <a *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="AltaUsuario()">       
+        <a  appHideShowNav *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="AltaUsuario()">       
             Registro Administradores
           </a>
-          <a *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="ListaEspecialistas()">       
+          <a  appHideShowNav *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="ListaEspecialistas()">       
             Lista Especialistas
           </a>
           <a *ngIf="isLogued" class="navbar-brand" (click)="Salir()">       
