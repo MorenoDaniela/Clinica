@@ -1,1 +1,45 @@
-<p>mis-turnos-paciente works!</p>
+<div class="container">
+  <label>Busqueda por especialidad o especialista</label>
+    <input class="form-control" [(ngModel)]='filter' ng-blur="ngBlur()">
+    <h1>
+        Listado de Turnos
+    </h1>
+    <table class="table table-danger table-striped">
+        <thead>
+            <tr class="table-danger">
+              <th scope="col">Index</th>
+              <th scope="col">Horario</th>
+              <th scope="col">Especialista</th>
+              <th scope="col">Especialidad</th>
+              <th scope="col">Comentario</th>
+              <th scope="col">Estado</th>
+              <th scope="col">Acciones</th>
+            </tr>
+          </thead>
+          <tbody *ngFor="let turno of listaTurnos | filter: filter; index as i" >
+            <tr>
+              <th>{{i+1}}</th>
+              <td>{{turno.Horario}}</td>
+              <td>{{turno.EspecialistaEmail}}</td>
+              <td>{{turno.Especialidad}}</td>
+              <td>
+                <div *ngIf="turno.Comentario!=''">
+                  {{turno.Comentario}}
+                </div>
+                <div *ngIf="turno.Estado=='Inicial'">
+                  <input class="form-control"[(ngModel)]='comentario'>
+                </div>
+            </td>
+              <td>{{turno.Estado}}</td>
+              <td scope="col">              
+                <button *ngIf="turno.Estado=='Inicial'" class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Cancelado',comentario)">
+                  CANCELAR
+                </button>
+                
+                
+                </td>
+            </tr>
+           
+          </tbody>
+      </table>
+</div>

@@ -9,7 +9,7 @@ import { Turno } from '../Clases/turno';
 export class TurnosService {
   public turnos;
   constructor(public router: Router, public firestore:AngularFirestore) {
-    this.turnos = this.firestore.collection("turnos").snapshotChanges();
+    this.turnos = this.firestore.collection("turnos").snapshotChanges().subscribe();
    }
 
    guardarTurno(turno:Turno) {
@@ -22,5 +22,16 @@ export class TurnosService {
       Comentario: turno.Comentario,
       Estado: turno.Estado,
     });
+  }
+
+  UpdateEstadoTurnoYComentario(id:string, update:string, comentario:string)
+  {
+    console.log(id +""+ update);
+    this.firestore.collection("turnos").doc(id).update({Estado:update, Comentario:comentario});
+  }
+  UpdateEstadoTurno(id:string, update:string)
+  {
+    console.log(id +""+ update);
+    this.firestore.collection("turnos").doc(id).update({Estado:update});
   }
 }

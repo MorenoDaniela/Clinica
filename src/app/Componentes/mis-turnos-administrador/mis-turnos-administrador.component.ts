@@ -5,11 +5,11 @@ import { IngresarService } from 'src/app/Servicios/ingresar.service';
 import { TurnosService } from 'src/app/Servicios/turnos.service';
 
 @Component({
-  selector: 'app-mis-turnos-paciente',
-  templateUrl: './mis-turnos-paciente.component.html',
-  styleUrls: ['./mis-turnos-paciente.component.css']
+  selector: 'app-mis-turnos-administrador',
+  templateUrl: './mis-turnos-administrador.component.html',
+  styleUrls: ['./mis-turnos-administrador.component.css']
 })
-export class MisTurnosPacienteComponent implements OnInit {
+export class MisTurnosAdministradorComponent implements OnInit {
 
   public filter!:string;
   public comentario!:string;
@@ -22,7 +22,7 @@ export class MisTurnosPacienteComponent implements OnInit {
     this.user = this.ingresarService.getItemLocal();
     if (this.user!=null && this.filter!=""){
       
-      this.listadoTurnos = this.turnosService.firestore.collection("turnos", ref => ref.where('PacienteEmail', '==', this.user.Email));
+      this.listadoTurnos = this.turnosService.firestore.collection("turnos", ref => ref.orderBy("Horario"));
       this.CargarTodosTurnos();
     }
     
@@ -60,7 +60,6 @@ export class MisTurnosPacienteComponent implements OnInit {
     ).subscribe();
     console.log(this.listaTurnos);
   }
-
   UpdateEstadoYComentario(id:string, estado:string, comentario:string){
     this.turnosService.UpdateEstadoTurnoYComentario(id,estado,comentario);
   }

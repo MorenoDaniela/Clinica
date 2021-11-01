@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Horario } from 'src/app/Clases/horario';
 import { IngresarService } from 'src/app/Servicios/ingresar.service';
 import { MisHorariosService } from 'src/app/Servicios/mis-horarios.service';
 import { ToasterService } from 'src/app/Servicios/toaster.service';
@@ -67,21 +68,24 @@ export class MiPerfilComponent implements OnInit {
     const DesdeSabado = this.formulario.controls['DesdeSabado'].value;
     const HastaSabado = this.formulario.controls['HastaSabado'].value;
     const Especialidad = this.formulario.controls['Especialidad'].value;
-    const Dias: Array<{dia: string; valor: boolean}> = [
-      { dia: "Lunes", valor: Lunes },
-      { dia: "Martes", valor: Martes },
-      { dia: "Miercoles", valor: Miercoles },
-      { dia: "Jueves", valor: Jueves },
-      { dia: "Viernes", valor: Viernes },
-      { dia: "Sabado", valor: Sabado },
-      { dia: "Desde", valor: Desde },
-      { dia: "Hasta", valor: Hasta },
-      { dia: "DesdeSabado", valor: DesdeSabado },
-      { dia: "HastaSabado", valor: HastaSabado },
-      { dia: "Especialidad", valor: Especialidad}
-  ];
+  //   const Dias: Array<{dia: string; valor: boolean}> = [
+  //     { dia: "Lunes", valor: Lunes },
+  //     { dia: "Martes", valor: Martes },
+  //     { dia: "Miercoles", valor: Miercoles },
+  //     { dia: "Jueves", valor: Jueves },
+  //     { dia: "Viernes", valor: Viernes },
+  //     { dia: "Sabado", valor: Sabado },
+  //     { dia: "Desde", valor: Desde },
+  //     { dia: "Hasta", valor: Hasta },
+  //     { dia: "DesdeSabado", valor: DesdeSabado },
+  //     { dia: "HastaSabado", valor: HastaSabado },
+  //     { dia: "Especialidad", valor: Especialidad}
+  // ];
+  console.log(Desde);
+  var horario = new Horario(Lunes,Martes,Miercoles,Jueves,Viernes,Sabado,Desde,Hasta,DesdeSabado,HastaSabado);
+  console.log(horario);
   // console.log(this.Dias+this.Desde+this.Hasta+this.DesdeSabado+this.HastaSabado, this.user);
-  this.ingresarService.UpdateMishorarios(this.user.Id,Dias);
+  this.ingresarService.UpdateMishorarios(this.user.Id,horario);
   this.toastr.showExito("Se registraron sus horarios con exito","Tus datos fueron enviados con exito.",2000);
   
   }

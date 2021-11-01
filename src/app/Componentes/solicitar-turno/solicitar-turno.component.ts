@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { AbstractControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
+import { Especialidad } from 'src/app/Clases/especialidad';
 import { Turno } from 'src/app/Clases/turno';
 import { Usuario } from 'src/app/Clases/usuario';
 import { EspecialidadesService } from 'src/app/Servicios/especialidades.service';
@@ -16,113 +17,58 @@ import { TurnosService } from 'src/app/Servicios/turnos.service';
   styleUrls: ['./solicitar-turno.component.css']
 })
 export class SolicitarTurnoComponent implements OnInit {
-  public EspecialidadSeleccionada: string = "";
-  public EspecialistaSeleccionado: string = "";
+  public formulario!: FormGroup;
+  public EspecialidadSeleccionada: Especialidad= new Especialidad;
+  public EspecialistaSeleccionado: Usuario = new Usuario;
+  public TurnoSeleccionado:string = "";
   public listadoEspecialidades:any = [];
   public listaEspecialidades:any = [];
   public listadoEspecialistas:any = [];
   public listaEspecialistas:any = [];
   public especiality!:string;
-  formulario!: FormGroup;
+  // formulario!: FormGroup;
+  public user:any;
 
   constructor(public routes: Router, public ingresarService: IngresarService,private fireStorage: AngularFireStorage, public toastr: ToasterService,public especialidades: EspecialidadesService,public fb: FormBuilder, public turnosService: TurnosService) { }
 
   ngOnInit(): void {
+    this.user = this.ingresarService.getItemLocal();
     this.buildForm();
     this.listadoEspecialidades = this.especialidades.firestore.collection("especialidades", ref => ref.orderBy('nombre'));
     this.listadoEspecialistas = this.ingresarService.db.collection("usuarios", ref => ref.where('TipoUsuario', '==', 'Especialista'));
-    this.cargarEspecialidades();
-   
+    this.formulario.valueChanges.subscribe(newVal =>console.log(newVal));
+    // this.cargarEspecialidades();
+  
   }
   
   buildForm() {
     this.formulario=this.fb.group({
-      Fecha:["",[ Validators.required, this.validarFecha]],
-      Hora:["", Validators.required],
-      Especialista:["", Validators.required],
-      EspecialidadSeleccionada:["", Validators.required]
+      Especialidad:[this.EspecialidadSeleccionada, Validators.required],
+      Especialista:[this.EspecialistaSeleccionado, Validators.required],
+      Fecha:[this.TurnoSeleccionado],
     })
   }
 
- 
-
-  validarFecha(control: AbstractControl)
-  {
-    let today = new Date();
-    const fecha = control.value;
-    let to = new Date();
-    let quinceDias = today.setDate(today.getDate() + 15);
-    
-    if(fecha!=null)
-    {
-      console.log(today);
-      let fechaParse = new Date(fecha);
-      console.log("today " + to.getTime()+ "15 dsps " +quinceDias);
-      if (fechaParse.getTime()<to.getTime()|| fechaParse.getTime()>quinceDias)
-      {
-        return {estaMal:true};
-      }
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.TurnoSeleccionado!="")
+    { console.log(this.TurnoSeleccionado);
+      console.log("entre");
     }
-   
-    return null;
   }
-  
-
+ 
   aceptar()
   {
-    const Fecha = this.formulario.controls['Fecha'].value;
-    const Hora = this.formulario.controls['Hora'].value;
     const turno = new Turno();
-    turno.Horario = Fecha + "-" + Hora;
+    turno.Horario = this.TurnoSeleccionado;
+    turno.EspecialistaEmail = this.EspecialistaSeleccionado.Email;
+    turno.Especialidad = this.EspecialidadSeleccionada.nombre;
+    turno.PacienteEmail = this.user.Email;
+    turno.Comentario ="";
+    turno.Estado="Inicial";
+    turno.Id = this.user.Id;
+    console.log(turno);
     this.turnosService.guardarTurno(turno);
     this.toastr.showExito("Se envio su turno con exito","Turno enviado.",2000);
-  }
-
-  cargarEspecialidades()
-{
-  this.listadoEspecialidades.snapshotChanges().pipe(
-    map( (data: any) => {
-      this.listaEspecialidades = new Array<string>();
-      data.map((especialidad: any) =>{
-        // console.log(especialidad);
-        var especialidad2: string ;
-        especialidad2 = especialidad.payload.doc.data().nombre;
-      //  console.log(especialidad2);
-        this.listaEspecialidades.push(especialidad2);
-      })
-    })
-  ).subscribe((datos: any) => {
-  });
- }
-   
- buscarEspecialistas()
- {
-  this.listaEspecialistas = new Array<Usuario>();
-  let especi = (<HTMLInputElement>document.getElementById('selectEspecialidad')).value;
-  console.log(especi);
-   this.listadoEspecialistas.snapshotChanges().pipe(
-     map( (data: any) => {
-       
-       data.map((usuario: any) =>{
-         console.log(usuario.payload.doc.data().Especialidad.includes(especi));
-         if (usuario.payload.doc.data().Especialidad.includes(especi))
-         {
-          console.log(usuario.payload.doc.data().Especialidad);
-          var usuario2: Usuario = new Usuario();
-          usuario2.Nombre = usuario.payload.doc.data().Nombre;
-          usuario2.Email = usuario.payload.doc.data().Email;
-          usuario2.DNI= usuario.payload.doc.data().DNI;
-          usuario2.Especialidad= usuario.payload.doc.data().Especialidad;
-          usuario2.Apellido = usuario.payload.doc.data().Apellido;
-          usuario2.Id = usuario.payload.doc.id;
-          usuario2.Aprobado = usuario.payload.doc.data().Aprobado;
-          // console.log(usuario2);
-          this.listaEspecialistas.push(usuario2);
-         }       
-       })
-     })
-   ).subscribe((datos: any) => {
-   });
   }
 
   pasoEspecialidadADetalle(event:any)
@@ -133,5 +79,9 @@ export class SolicitarTurnoComponent implements OnInit {
   {
     this.EspecialistaSeleccionado=event;
   }
-  
+  pasoTurnoADetalle(event:any)
+  {
+    this.TurnoSeleccionado=event;
+  }
+
 }

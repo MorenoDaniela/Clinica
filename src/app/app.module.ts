@@ -32,6 +32,11 @@ import { TurnosComponent } from './Componentes/turnos/turnos.component';
 import { DetalleEspecialidadComponent } from './Componentes/detalle-especialidad/detalle-especialidad.component';
 import { ButtonsEspecialistasComponent } from './Componentes/buttons-especialistas/buttons-especialistas.component';
 import { DetalleEspecialistaComponent } from './Componentes/detalle-especialista/detalle-especialista.component';
+import { DiaHoraComponent } from './Componentes/dia-hora/dia-hora.component';
+import { DetalleDiaHoraComponent } from './Componentes/detalle-dia-hora/detalle-dia-hora.component';
+import { FilterPipe } from './filter.pipe';
+import { FilterEspecialistaPipe } from './filter-especialista.pipe';
+import { MisTurnosAdministradorComponent } from './Componentes/mis-turnos-administrador/mis-turnos-administrador.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +60,12 @@ import { DetalleEspecialistaComponent } from './Componentes/detalle-especialista
     TurnosComponent,
     DetalleEspecialidadComponent,
     ButtonsEspecialistasComponent,
-    DetalleEspecialistaComponent
+    DetalleEspecialistaComponent,
+    DiaHoraComponent,
+    DetalleDiaHoraComponent,
+    FilterPipe,
+    FilterEspecialistaPipe,
+    MisTurnosAdministradorComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,54 @@
+<div class="container">
+    <label>Busqueda por especialidad o especialista</label>
+    <div class="input-group mb-3">
+        
+        <input class="form-control" [(ngModel)]='filter' ng-blur="ngBlur()">
+        <div class="input-group-prepend">
+            
+            <span class="input-group-text" ><svg  xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+           </svg></span> 
+         </div>
+      </div>     
+      <h1>
+          Listado de Turnos
+      </h1>
+      <table class="table table-danger table-striped">
+          <thead>
+              <tr class="table-danger">
+                <th scope="col">Index</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Especialista</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Comentario</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let turno of listaTurnos | filter: filter; index as i" >
+              <tr>
+                <th>{{i+1}}</th>
+                <td>{{turno.Horario}}</td>
+                <td>{{turno.EspecialistaEmail}}</td>
+                <td>{{turno.PacienteEmail}}</td>
+                <td>{{turno.Especialidad}}</td>
+                <td>                  
+                    <div *ngIf="turno.Comentario!=''">
+                        {{turno.Comentario}}
+                      </div>
+                      <div *ngIf="turno.Estado=='Inicial'">
+                        <input class="form-control"[(ngModel)]='comentario'>
+                      </div>            
+              </td>
+                <td>{{turno.Estado}}</td>
+                <td scope="col">              
+                  <button *ngIf="turno.Estado=='Inicial'" class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Cancelado',comentario)">
+                    CANCELAR
+                  </button>                 
+                  </td>
+              </tr>
+             
+            </tbody>
+        </table>
+  </div>

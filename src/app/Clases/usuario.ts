@@ -13,4 +13,14 @@ export class Usuario {
     EstaLogueado!:boolean;
     Id!:string;
     Aprobado!:boolean;
+    Lunes! : boolean;
+    Martes! : boolean;
+     Miercoles! : boolean;
+     Jueves! : boolean;
+     Viernes! : boolean;
+     Sabado! :boolean;
+     Desde! : string;
+     Hasta! : string;
+     DesdeSabado! : string;
+     HastaSabado!: string;
 }

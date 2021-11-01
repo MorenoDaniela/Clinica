@@ -1,6 +1,14 @@
 
+<!-- (click)="emitirEspecialidad(especialidad)" -->
+<!-- <div [formGroup]="formulario">
+   [formControlName]="Especialidad"
+</div> -->
+<div class="d-inline-block" *ngFor="let especialidad of listaEspecialidades" (click)="emitirEspecialidad(especialidad)">
+   <!-- <input hidden  ngDefaultControl="especialidad"> -->
+<!-- <button class="btn btn-outline-danger mr-1" type="button" style="margin: auto;">{{especialidad.nombre}} </button> -->
+   <button type="button" class="btn btn-danger" style="margin-right: 5px">
+      <img src="{{especialidad.imagen}}" style="height: 70px;width: 70px;">
+      {{especialidad.nombre}}
+   </button>
 
-   <div class="d-inline-block" *ngFor="let especialidad of listaEspecialidades"  (click)="emitirEspecialidad(especialidad)">
-      <input hidden  ngDefaultControl="especialidad">
-<button class="btn btn-outline-danger mr-1" type="button" style="margin: auto;">{{especialidad}} </button>
-   </div>
+</div>

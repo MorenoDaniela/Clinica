@@ -9,6 +9,7 @@ import * as firebase from 'firebase/compat';
 import { ToastrService } from 'ngx-toastr';
 import { Observable, throwError } from 'rxjs';
 import { first, map, subscribeOn } from 'rxjs/operators';
+import { Horario } from '../Clases/horario';
 import { Usuario } from '../Clases/usuario';
 import { NavComponent } from '../Componentes/nav/nav.component';
 import { ToasterService } from './toaster.service';
@@ -248,10 +249,12 @@ getId(email:string):any{
   this.db.collection("usuarios").doc(id).update({Aprobado: update})
   }
 
-  UpdateMishorarios(id:string, mishorarios:any)
+  UpdateMishorarios(id:string, mishorarios:Horario)
   {
-    console.log(id +""+ mishorarios);
-  this.db.collection("usuarios").doc(id).update({Mishorarios: mishorarios})
+    console.log(id +""+ mishorarios.Lunes);
+  // this.db.collection("usuarios").doc(id).update({Mishorarios: mishorarios});
+
+  this.db.collection('usuarios').doc(id).update(Object.assign({}, mishorarios));
   }
  
 }

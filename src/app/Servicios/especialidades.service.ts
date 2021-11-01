@@ -13,9 +13,10 @@ export class EspecialidadesService {
     this.especialidades = this.firestore.collection("especialidades").snapshotChanges();
   }
 
-  guardarEspecialidad(especialidad:string) {
+  guardarEspecialidad(especialidad:string,img:string) {
     this.firestore.collection('especialidades').add({
-      nombre : especialidad
+      nombre : especialidad,
+      imagen: img
     });
   }
   

@@ -6,6 +6,9 @@ import { ListaEspecialidadComponent } from './Componentes/lista-especialidad/lis
 import { ListaEspecialistasComponent } from './Componentes/lista-especialistas/lista-especialistas.component';
 import { LoginComponent } from './Componentes/login/login.component';
 import { MiPerfilComponent } from './Componentes/mi-perfil/mi-perfil.component';
+import { MisTurnosAdministradorComponent } from './Componentes/mis-turnos-administrador/mis-turnos-administrador.component';
+import { MisTurnosEspecialistaComponent } from './Componentes/mis-turnos-especialista/mis-turnos-especialista.component';
+import { MisTurnosPacienteComponent } from './Componentes/mis-turnos-paciente/mis-turnos-paciente.component';
 import { RegistroPacienteComponent } from './Componentes/registro-paciente/registro-paciente.component';
 import { RegistroComponent } from './Componentes/registro/registro.component';
 import { SolicitarTurnoComponent } from './Componentes/solicitar-turno/solicitar-turno.component';
@@ -24,6 +27,9 @@ const routes: Routes = [
   {path: 'indexRegistro', component:IndexRegistroComponent},
   {path: 'miPerfil', component:MiPerfilComponent},
   {path:'solicitar-turno',component:SolicitarTurnoComponent},
+  {path: 'MisTurnosPaciente',component:MisTurnosPacienteComponent},
+  {path: 'MisTurnosEspecialista',component:MisTurnosEspecialistaComponent},
+  {path: 'MisTurnosAdministrador',component:MisTurnosAdministradorComponent,},
   {path: 'Usuarios', loadChildren:()=>import('./usuarios/usuarios.module').then(m => UsuariosModule), canActivate:[PuedoVerGuard]},
 ];
 

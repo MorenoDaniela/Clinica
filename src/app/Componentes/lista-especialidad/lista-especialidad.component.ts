@@ -1,42 +1,73 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { EspecialidadesService } from 'src/app/Servicios/especialidades.service';
 import { map } from 'rxjs/operators';
+import { ControlValueAccessor, FormGroup, FormGroupDirective, NG_VALUE_ACCESSOR } from '@angular/forms';
+import { Especialidad } from 'src/app/Clases/especialidad';
+import { IngresarService } from 'src/app/Servicios/ingresar.service';
+import { Usuario } from 'src/app/Clases/usuario';
 @Component({
   selector: 'app-lista-especialidad',
   templateUrl: './lista-especialidad.component.html',
   styleUrls: ['./lista-especialidad.component.css']
 })
+//, ControlValueAccessor
 export class ListaEspecialidadComponent implements OnInit {
+  @Output() eventoEspecialidadSeleccionada : EventEmitter<Especialidad> = new EventEmitter<Especialidad>();
+  @Input()
+  EspecialistaAMostrar: Usuario= new Usuario;
+  // @Input() public formulario!: FormGroup ;
   public listadoEspecialidades:any = [];
   public listaEspecialidades:any = [];
-  @Output() eventoEspecialidadSeleccionada : EventEmitter<string> = new EventEmitter<string>();
-  constructor(public especialidades: EspecialidadesService) { }
-
+  public EspecialidadSeleccionada:any;
+  public touched:boolean = false;
+  
+  constructor(public especialidades: EspecialidadesService, public ingresarService: IngresarService,private rootFormGroup: FormGroupDirective) {
+    if (this.EspecialistaAMostrar!=null)
+    {
+      this.listadoEspecialidades =this.ingresarService.db.collection("especialidades", ref => ref.orderBy('nombre'));
+      this.cargarEspecialidades();
+    }
+   }
+  
+  ngOnChanges(changes: SimpleChanges): void {
+    if (this.EspecialistaAMostrar!=null)
+    {
+      this.listadoEspecialidades =this.ingresarService.db.collection("especialidades", ref => ref.orderBy('nombre'));
+      this.cargarEspecialidades();
+    }
+  }
   ngOnInit(): void {
-    this.listadoEspecialidades = this.especialidades.firestore.collection("especialidades", ref => ref.orderBy('nombre'));
-    this.cargarEspecialidades();
+    // this.form = this.rootFormGroup.control;
+   
+  }
+ 
+
+      cargarEspecialidades()
+    {
+      
+      this.listadoEspecialidades.snapshotChanges().pipe(
+        map( (data: any) => {
+          this.listaEspecialidades = new Array<Especialidad>();
+          data.map((especialidad: any) =>{
+              if (this.EspecialistaAMostrar.Especialidad!=undefined)
+              {
+                if (this.EspecialistaAMostrar?.Especialidad?.includes(especialidad.payload.doc.data().nombre)){
+                  var especialidad2: Especialidad = new Especialidad();
+                  especialidad2.nombre = especialidad.payload.doc.data().nombre;
+                  especialidad2.imagen = especialidad.payload.doc.data().imagen;
+                  this.listaEspecialidades.push(especialidad2);
+                }
+              }
+                      
+          })
+        })
+      ).subscribe((datos: any) => {
+      });
+    }
+  emitirEspecialidad(especialidad:Especialidad)
+  {
+    console.log(especialidad);
+      this.eventoEspecialidadSeleccionada.emit(especialidad);
   }
 
-
-  cargarEspecialidades()
-{
-  this.listadoEspecialidades.snapshotChanges().pipe(
-    map( (data: any) => {
-      this.listaEspecialidades = new Array<string>();
-      data.map((especialidad: any) =>{
-        console.log(especialidad);
-        var especialidad2: string ;
-        especialidad2 = especialidad.payload.doc.data().nombre;
-       console.log(especialidad2);
-        this.listaEspecialidades.push(especialidad2);
-      })
-    })
-  ).subscribe((datos: any) => {
-  });
- }
- emitirEspecialidad(especialidad:any)
- {
-  console.log(especialidad);
-    this.eventoEspecialidadSeleccionada.emit(especialidad);
- }
 }

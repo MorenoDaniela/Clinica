@@ -33,6 +33,9 @@ export class NavComponent implements OnInit {
     }else
     {
       this.isLogued=false;
+      this.isPaciente=false;
+      this.isEspecialista=false;
+      this.isAdmin=false;
     }
     
   }
@@ -61,6 +64,19 @@ export class NavComponent implements OnInit {
   SolicitarTurno()
   {
     this.routes.navigate(['solicitar-turno']);
+  }
+
+  MisTurnosPaciente()
+  {
+    this.routes.navigate(['MisTurnosPaciente']);
+  }
+  MisTurnosEspecialista()
+  {
+    this.routes.navigate(['MisTurnosEspecialista']);
+  }
+  MisTurnosAdministrador()
+  {
+    this.routes.navigate(['MisTurnosAdministrador']);
   }
   Salir()
   {

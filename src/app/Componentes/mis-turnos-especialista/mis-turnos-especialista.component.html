@@ -1,1 +1,63 @@
-<p>mis-turnos-especialista works!</p>
+<div class="container">
+    <label>Busqueda por especialidad o especialista</label>
+      <input class="form-control" [(ngModel)]='filter' ng-blur="ngBlur()">
+      <h1>
+          Listado de Turnos
+      </h1>
+      <table class="table table-danger table-striped">
+          <thead>
+              <tr class="table-danger">
+                <th scope="col">Index</th>
+                <th scope="col">Horario</th>
+                <th scope="col">Paciente</th>
+                <th scope="col">Especialidad</th>
+                <th scope="col">Comentario</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acciones</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let turno of listaTurnos | filterEspecialista: filter; index as i" >
+              <tr>
+                <th>{{i+1}}</th>
+                <td>{{turno.Horario}}</td>
+                <td>{{turno.PacienteEmail}}</td>
+                <td>{{turno.Especialidad}}</td>
+                <td>{{turno.Comentario}}</td>
+                <td>{{turno.Estado}}</td>
+                <td scope="col">
+                 
+                  <div *ngIf="turno.Estado=='Inicial'">
+                    <button  class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Cancelado',comentario)">
+                        CANCELAR
+                      </button>
+                      <button  class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Rechazado',comentario)" >
+                        RECHAZAR
+                      </button>
+                      <label>Comentario
+                        <input class="form-control"[(ngModel)]='comentario'>
+                      </label>
+                  </div>
+                  <div *ngIf="turno.Estado=='Inicial'">
+                    <button  class="btn btn-sm btn-success" (click)="UpdateEstado(turno.Id,'Aceptado')">
+                        ACEPTAR
+                      </button>                      
+                  </div>
+                  <div *ngIf="turno.Estado=='Aceptado'">
+                    <button  class="btn btn-sm btn-primary" (click)="UpdateEstadoYComentario(turno.Id,'Finalizado',comentario)">
+                        FINALIZAR
+                      </button>
+                      <label>Comentario
+                        <input class="form-control"[(ngModel)]='comentario'>
+                      </label>                     
+                  </div>
+                 
+                  
+                  <!-- <button *ngIf="!especialista.Aprobado"  class="btn btn-sm btn-success" >
+                    HABILITAR
+                  </button> -->
+                  </td>
+              </tr>
+             
+            </tbody>
+        </table>
+  </div>

@@ -10,10 +10,19 @@
       <a class="navbar-brand" *ngIf="isLogued" (click)="MiPerfil()">        
         Mi Perfil
       </a>
+      <a class="navbar-brand" *ngIf="isLogued && isPaciente" (click)="MisTurnosPaciente()">        
+        Mis Turnos
+      </a>
+      <a class="navbar-brand" *ngIf="isLogued && isAdmin" (click)="MisTurnosAdministrador">        
+        Mis Turnos
+      </a>
+      <a class="navbar-brand" *ngIf="isLogued && isEspecialista" (click)="MisTurnosEspecialista()">        
+        Mis Turnos
+      </a>
       <a class="navbar-brand" *ngIf="isLogued && isAdmin || isPaciente" (click)="SolicitarTurno()">        
         Solicitar Turno
       </a>
-      <a class="navbar-brand" (click)="RegistroPyE()">       
+      <a class="navbar-brand" *ngIf="isLogued && isAdmin || !isLogued" (click)="RegistroPyE()">       
         Registro
       </a>
      

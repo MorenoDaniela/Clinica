@@ -1,1 +1,6 @@
-<p>Especialidad seleccionada: {{EspecialidadAMostrar}}</p>
+
+
+<!-- <div [formGroup]="formulario">
+    [formControlName]="Especialidad"
+</div> -->
+<span class="alert alert-success" *ngIf="EspecialidadAMostrar.nombre">Especialidad seleccionada: {{EspecialidadAMostrar.nombre}}</span>

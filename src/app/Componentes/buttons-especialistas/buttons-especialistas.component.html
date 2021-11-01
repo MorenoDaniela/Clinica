@@ -1,4 +1,13 @@
-<div class="d-inline-block" *ngFor="let especialista of listaEspecialistas"  (click)="emitirEspecialista(especialista)">
-    <input hidden  ngDefaultControl="especialista">
-    <button class="btn btn-outline-danger mr-1" type="button" style="margin: auto;" ngDefaultControl>{{especialista.Nombre}} {{especialista.Apellido}}</button>
+
+
+<!-- <div [formGroup]="formulario">
+    
+    [formControlName]="Especialista"
+</div> -->
+<div class="text-center d-inline-block" *ngFor="let especialista of listaEspecialistas"  (click)="emitirEspecialista(especialista)" >
+    <button class="btn-outline-danger mr-1" type="button"style="border-radius: 2px;" >
+        <img src="{{especialista.ImagenUno}}" class="image" style="width: 160px; height: 90px; " > 
+        <p> {{especialista.Nombre}} </p>  
+    </button>
+   
 </div>
