@@ -1,27 +1,24 @@
 # Clinica
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
+Este proyecto fue generado con [Angular CLI](https://github.com/angular/angular-cli) version 12.2.6.
 
 ## Development server
+En la consola escribi ng serve. Navega hasta 'localhost:4200'. La app va a estar arriba.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+**NavBar**
+Desde la navbar se puede acceder a todas las páginas disponibles para cada tipo de Usuario.
 
-## Code scaffolding
+**#Registro**
+Desde acá se pueden registrar dos tipos de Usuarios: Pacientes y Especialistas.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+**#Login**
+Para registrarse se debe confirmar el email.
 
-## Build
+**#Mi Perfil**
+En esta sección se pueden visualizar los datos de tu perfil, si tu perfil es de tipo Especialista también se puede dar de alta tus horarios y especialidades para la clínica.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+**#Solitar Turno**
+Desde esta sección un Paciente o Administrador puede solicitar un turno.
 
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+**#Mis turnos**
+Desde esta sección un Usuario puede administrar sus turnos.
