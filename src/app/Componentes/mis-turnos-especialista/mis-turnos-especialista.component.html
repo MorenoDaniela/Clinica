@@ -1,5 +1,5 @@
 <div class="container">
-    <label>Busqueda por especialidad o especialista</label>
+    <label>Busqueda por especialidad o paciente</label>
       <input class="form-control" [(ngModel)]='filter' ng-blur="ngBlur()">
       <h1>
           Listado de Turnos
@@ -27,14 +27,14 @@
                 <td scope="col">
                  
                   <div *ngIf="turno.Estado=='Inicial'">
-                    <button  class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Cancelado',comentario)">
+                    <button  class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Cancelado',turno.comentario)">
                         CANCELAR
                       </button>
-                      <button  class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Rechazado',comentario)" >
+                      <button  class="btn btn-sm btn-danger" (click)="UpdateEstadoYComentario(turno.Id,'Rechazado',turno.comentario)" >
                         RECHAZAR
                       </button>
                       <label>Comentario
-                        <input class="form-control"[(ngModel)]='comentario'>
+                        <input class="form-control"[(ngModel)]='turno.comentario'>
                       </label>
                   </div>
                   <div *ngIf="turno.Estado=='Inicial'">
@@ -43,14 +43,20 @@
                       </button>                      
                   </div>
                   <div *ngIf="turno.Estado=='Aceptado'">
-                    <button  class="btn btn-sm btn-primary" (click)="UpdateEstadoYComentario(turno.Id,'Finalizado',comentario)">
+                    <button  class="btn btn-sm btn-primary" (click)="UpdateEstadoYComentario(turno.Id,'Finalizado',turno.comentario)">
                         FINALIZAR
                       </button>
                       <label>Comentario
-                        <input class="form-control"[(ngModel)]='comentario'>
+                        <input class="form-control"[(ngModel)]='turno.comentario'>
                       </label>                     
                   </div>
-                 
+                  <div *ngIf="turno.Estado=='Finalizado'">
+                    <button  class="btn btn-sm btn-primary" (click)="AHistoriaClinica(turno)">
+                        Historia clinica
+                      </button> 
+                      <!-- <app-button-intermedio (eventoPeliculaSeleccionada)="pasoPeliculaADetalle($event)"> </app-button-intermedio>   -->
+                      <!-- aca la cosa                                  -->
+                  </div>
                   
                   <!-- <button *ngIf="!especialista.Aprobado"  class="btn btn-sm btn-success" >
                     HABILITAR

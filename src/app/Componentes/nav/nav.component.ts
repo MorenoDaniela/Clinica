@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { Router } from '@angular/router';
 import { IngresarService } from 'src/app/Servicios/ingresar.service';
 import { Subject } from 'rxjs/internal/Subject';
@@ -27,17 +27,55 @@ export class NavComponent implements OnInit {
     if(user!=null)
     {
       this.isLogued=true;
-      if(user.TipoUsuario == "Administrador") this.isAdmin = true;    
-      if(user.TipoUsuario=="Especialista") this.isEspecialista=true;
-      if(user.TipoUsuario=="Paciente") this.isPaciente=true;
+      if(user.TipoUsuario == "Administrador") {
+        this.isAdmin = true;
+        this.isPaciente=false;
+      this.isEspecialista=false;  
+      }
+      if(user.TipoUsuario=="Especialista")
+        {
+          this.isEspecialista=true;
+          this.isPaciente=false;
+          this.isAdmin=false;
+        } 
+      if(user.TipoUsuario=="Paciente"){
+        this.isPaciente=true;
+        this.isEspecialista=false;
+        this.isAdmin=false;
+      }
     }else
     {
       this.isLogued=false;
-      this.isPaciente=false;
-      this.isEspecialista=false;
-      this.isAdmin=false;
     }
     
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    let user = this.ingresarService.getItemLocal();
+    console.log(user);
+    if(user!=null)
+    {
+      this.isLogued=true;
+      if(user.TipoUsuario == "Administrador") {
+        this.isAdmin = true;
+        this.isPaciente=false;
+      this.isEspecialista=false;  
+      }
+      if(user.TipoUsuario=="Especialista")
+        {
+          this.isEspecialista=true;
+          this.isPaciente=false;
+          this.isAdmin=false;
+        } 
+      if(user.TipoUsuario=="Paciente"){
+        this.isPaciente=true;
+        this.isEspecialista=false;
+        this.isAdmin=false;
+      }
+    }else
+    {
+      this.isLogued=false;
+    }
   }
 
   RegistroPyE()
@@ -77,6 +115,18 @@ export class NavComponent implements OnInit {
   MisTurnosAdministrador()
   {
     this.routes.navigate(['MisTurnosAdministrador']);
+  }
+  // HistoriaClinicaPaciente()
+  // {
+  //   this.routes.navigate(['MisTurnosPaciente']);
+  // }
+  HistoriaClinicaEspecialista()
+  {
+    this.routes.navigate(['HistoriaClinicaEspecialista']);
+  }
+  HistoriaClinicaAdministrador()
+  {
+    this.routes.navigate(['HistoriaClinicaAdministrador']);
   }
   Salir()
   {

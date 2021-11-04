@@ -21,7 +21,7 @@ export class ListaEspecialidadComponent implements OnInit {
   public EspecialidadSeleccionada:any;
   public touched:boolean = false;
   
-  constructor(public especialidades: EspecialidadesService, public ingresarService: IngresarService,private rootFormGroup: FormGroupDirective) {
+  constructor(public especialidades: EspecialidadesService, public ingresarService: IngresarService) {
     if (this.EspecialistaAMostrar!=null)
     {
       this.listadoEspecialidades =this.ingresarService.db.collection("especialidades", ref => ref.orderBy('nombre'));

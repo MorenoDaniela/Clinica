@@ -17,9 +17,8 @@ import { TurnosService } from 'src/app/Servicios/turnos.service';
   styleUrls: ['./solicitar-turno.component.css']
 })
 export class SolicitarTurnoComponent implements OnInit {
-  public formulario!: FormGroup;
-  public EspecialidadSeleccionada: Especialidad= new Especialidad;
-  public EspecialistaSeleccionado: Usuario = new Usuario;
+  public EspecialidadSeleccionada!: Especialidad;
+  public EspecialistaSeleccionado!: Usuario;
   public TurnoSeleccionado:string = "";
   public listadoEspecialidades:any = [];
   public listaEspecialidades:any = [];
@@ -33,27 +32,15 @@ export class SolicitarTurnoComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.ingresarService.getItemLocal();
-    this.buildForm();
     this.listadoEspecialidades = this.especialidades.firestore.collection("especialidades", ref => ref.orderBy('nombre'));
     this.listadoEspecialistas = this.ingresarService.db.collection("usuarios", ref => ref.where('TipoUsuario', '==', 'Especialista'));
-    this.formulario.valueChanges.subscribe(newVal =>console.log(newVal));
-    // this.cargarEspecialidades();
-  
+    this.EspecialidadSeleccionada=new Especialidad();
+    this.EspecialidadSeleccionada.nombre="";
   }
   
-  buildForm() {
-    this.formulario=this.fb.group({
-      Especialidad:[this.EspecialidadSeleccionada, Validators.required],
-      Especialista:[this.EspecialistaSeleccionado, Validators.required],
-      Fecha:[this.TurnoSeleccionado],
-    })
-  }
 
   ngOnChanges(changes: SimpleChanges): void {
-    if (this.TurnoSeleccionado!="")
-    { console.log(this.TurnoSeleccionado);
-      console.log("entre");
-    }
+    console.log("here");    
   }
  
   aceptar()
@@ -74,13 +61,18 @@ export class SolicitarTurnoComponent implements OnInit {
   pasoEspecialidadADetalle(event:any)
   {
     this.EspecialidadSeleccionada=event;
+    this.TurnoSeleccionado="";
   }
   pasoEspecialistaADetalle(event:any)
   {
     this.EspecialistaSeleccionado=event;
+    this.EspecialidadSeleccionada=new Especialidad();
+    this.EspecialidadSeleccionada.nombre="";
+    this.TurnoSeleccionado="";
   }
   pasoTurnoADetalle(event:any)
   {
+    console.log(event);
     this.TurnoSeleccionado=event;
   }
 

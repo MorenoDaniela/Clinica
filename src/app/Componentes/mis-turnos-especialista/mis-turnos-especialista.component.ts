@@ -1,7 +1,9 @@
-import { Component, OnInit, SimpleChanges } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, SimpleChanges } from '@angular/core';
+import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
 import { Turno } from 'src/app/Clases/turno';
 import { IngresarService } from 'src/app/Servicios/ingresar.service';
+import { ToasterService } from 'src/app/Servicios/toaster.service';
 import { TurnosService } from 'src/app/Servicios/turnos.service';
 
 @Component({
@@ -10,12 +12,13 @@ import { TurnosService } from 'src/app/Servicios/turnos.service';
   styleUrls: ['./mis-turnos-especialista.component.css']
 })
 export class MisTurnosEspecialistaComponent implements OnInit {
+  @Output() seDisparaTurno : EventEmitter<Turno> = new EventEmitter<Turno>();
   public filter!:string;
   public comentario!:string;
   public user!:any;
   public listadoTurnos:any = [];
   public listaTurnos:any = [];
-  constructor(public turnosService: TurnosService, public ingresarService: IngresarService) { }
+  constructor(public turnosService: TurnosService, public ingresarService: IngresarService, public toaster: ToasterService, public routes: Router) { }
 
   ngOnInit(): void {
     this.user = this.ingresarService.getItemLocal();
@@ -83,10 +86,24 @@ export class MisTurnosEspecialistaComponent implements OnInit {
   }
 
   UpdateEstadoYComentario(id:string, estado:string, comentario:string){
-    this.turnosService.UpdateEstadoTurnoYComentario(id,estado,comentario);
+    console.log("adentro de update"+comentario);
+    if (comentario == undefined){
+      this.toaster.showError("Debe ingresar comentario para poder proseguir","Error",3000);
+    }else{
+      this.turnosService.UpdateEstadoTurnoYComentario(id,estado,comentario);
+    }
+    
   }
   UpdateEstado(id:string, estado:string){
     this.turnosService.UpdateEstadoTurno(id,estado);
+  }
+
+  AHistoriaClinica(turno:any)
+  {
+    this.seDisparaTurno.emit(turno);
+    const tu = turno;
+    console.log("wtf");
+    this.routes.navigate(['AltaHistoriaClinica',JSON.stringify(tu)]);//{turno: JSON.stringify(turno)}
   }
 
 }

@@ -1,25 +1,25 @@
 <div class="form-control" style="margin:auto">
-  <form [formGroup]="formulario" (ngSubmit)="aceptar()">     
-    <div class="col-md-12 col-lg-12">
-        <h4 class="mb-3">Sacar turno</h4> 
-      
-          <div class="row g-3">
-            <app-buttons-especialistas (eventoEspecialistaSeleccionado)="pasoEspecialistaADetalle($event)" ></app-buttons-especialistas>
-            <span class="text-danger" *ngIf="formulario.get('Especialista')?.hasError('required') && formulario.get('Especialista')?.touched">El especialista es requerido.</span>
-            <app-detalle-especialista [formulario]="formulario" [EspecialistaAMostrar]="EspecialistaSeleccionado"  ></app-detalle-especialista>
-            
-            <!-- (eventoEspecialidadSeleccionada)="pasoEspecialidadADetalle($event)" -->
-            <app-lista-especialidad (eventoEspecialidadSeleccionada)="pasoEspecialidadADetalle($event)"   [EspecialistaAMostrar]="EspecialistaSeleccionado" ></app-lista-especialidad>
-            <span class="text-danger" *ngIf="formulario.get('EspecialidadSeleccionada')?.hasError('required') && formulario.get('EspecialidadSeleccionada')?.touched">La especialidad es requerida.</span>
-            <app-detalle-especialidad [formulario]="formulario" [EspecialidadAMostrar]="EspecialidadSeleccionada" >
-              
-            </app-detalle-especialidad>
-            <app-dia-hora (eventoTurnoSeleccionado)="pasoTurnoADetalle($event)" [EspecialistaAMostrar]="EspecialistaSeleccionado" ></app-dia-hora>
-            <span class="text-danger" *ngIf="formulario.get('Fecha')?.hasError('required') && formulario.get('Fecha')?.touched">La fecha es requerida.</span>
-           <app-detalle-dia-hora [formulario]="formulario" [TurnoAMostrar]="TurnoSeleccionado" > </app-detalle-dia-hora>           
-          </div>    
-        <br>
-          <button class="w-100 btn btn-primary btn-lg" type="submit" [disabled]="formulario.invalid" >Pedir Turno</button>
-    </div>
-  </form>
+  <!-- <form [formGroup]="formulario" (ngSubmit)="aceptar()">     
+    
+  </form> -->
+  <div class="col-md-12 col-lg-12">
+    <h4 class="mb-3">Sacar turno</h4> 
+  
+      <div class="row g-3">
+        <app-buttons-especialistas (eventoEspecialistaSeleccionado)="pasoEspecialistaADetalle($event)" ></app-buttons-especialistas>
+        
+        <app-detalle-especialista  [EspecialistaAMostrar]="EspecialistaSeleccionado"  ></app-detalle-especialista>
+        
+
+        <app-lista-especialidad *ngIf="EspecialistaSeleccionado" (eventoEspecialidadSeleccionada)="pasoEspecialidadADetalle($event)"   [EspecialistaAMostrar]="EspecialistaSeleccionado" ></app-lista-especialidad>
+
+        <app-detalle-especialidad *ngIf="EspecialidadSeleccionada.nombre!=''"  [EspecialidadAMostrar]="EspecialidadSeleccionada" >
+          
+        </app-detalle-especialidad>
+        <app-dia-hora *ngIf="EspecialidadSeleccionada.nombre!=''" (eventoTurnoSeleccionado)="pasoTurnoADetalle($event)" [EspecialistaAMostrar]="EspecialistaSeleccionado" ></app-dia-hora>
+       <app-detalle-dia-hora  [TurnoAMostrar]="TurnoSeleccionado" > </app-detalle-dia-hora>           
+      </div>    
+    <br>
+      <button class="w-100 btn btn-primary btn-lg" type="button" (click)="aceptar()" [disabled]="TurnoSeleccionado=='' || EspecialidadSeleccionada.nombre==''" >Pedir Turno</button>
+</div>
 </div>

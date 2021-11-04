@@ -1,9 +1,11 @@
 <div class="container">
-  <label>Busqueda por especialidad o especialista</label>
-    <input class="form-control" [(ngModel)]='filter' ng-blur="ngBlur()">
-    <h1>
+  <label>Busqueda por especialidad o especialista
+    <input class="form-control" [(ngModel)]='filter' ng-blur="ngBlur()" placeholder="Buscar">
+  </label>
+   
+    <h3>
         Listado de Turnos
-    </h1>
+    </h3>
     <table class="table table-danger table-striped">
         <thead>
             <tr class="table-danger">

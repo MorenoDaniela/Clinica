@@ -1,7 +1,7 @@
 // import { elementEventFullName } from '@angular/compiler/src/view_compiler/view_compiler';
 // import { newArray } from '@angular/compiler/src/util';
 import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
-import { FormGroup, FormGroupDirective } from '@angular/forms';
+import { ControlContainer, FormGroup, FormGroupDirective } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Turno } from 'src/app/Clases/turno';
@@ -16,7 +16,8 @@ import { TurnosService } from 'src/app/Servicios/turnos.service';
   styleUrls: ['./dia-hora.component.css']
 })
 export class DiaHoraComponent implements OnInit {
-  // @Input() public formulario!: FormGroup ;
+
+  // @Input() ControladorFecha!: FormGroup;
   @Input()
   EspecialistaAMostrar: Usuario = new Usuario;
   @Output() eventoTurnoSeleccionado : EventEmitter<string> = new EventEmitter<string>();
@@ -36,7 +37,7 @@ export class DiaHoraComponent implements OnInit {
   listaTurnos:any;
   public listadoDefinitivo:any =[];
 
-  constructor(private rootFormGroup: FormGroupDirective, public turnosService: TurnosService, public toaster: ToasterService) {
+  constructor( public turnosService: TurnosService, public toaster: ToasterService) {
     
    }
 
@@ -73,7 +74,7 @@ export class DiaHoraComponent implements OnInit {
   
     this.listadoTurnos.snapshotChanges().pipe(
       map( (data: any) => {
-        // this.listaTurnos = new Array<Turno>();
+        this.listaTurnos = new Array<Turno>();
         data.map((turnito: any) =>{
           // if (this.EspecialistaAMostrar.Email == turnito.payload.doc.data().EspecialistaEmail && 
           // turnito.payload.doc.data().Horario == this.turno){
@@ -92,28 +93,40 @@ export class DiaHoraComponent implements OnInit {
                       
         })
       })
-    ).subscribe();
+    )
+    // .subscribe();
+ 
     console.log(this.listaTurnos);
   }
 
    VerificarDisponibilidad()
   {
-    // this.listadoDefinitivo=[];
-    for (var i=0;i<this.otroArray.length;i++){
-      for (var j=0;j<this.listaTurnos.length;j++){
-       
-        if (this.otroArray[i]!= this.listaTurnos[j].Horario && this.EspecialistaAMostrar.Email!=this.listaTurnos[j].EspecialistaEmail)
-        {
-          // console.log(this.otroArray[i] + " " + this.listaTurnos[j].Horario)
-          this.listadoDefinitivo.push(this.otroArray[i])
-        }
-        if (this.otroArray[i]== this.listaTurnos[j].Horario && this.EspecialistaAMostrar.Email==this.listaTurnos[j].EspecialistaEmail)
-        {
-          console.log(this.otroArray[i] + " " + this.listaTurnos[j].Horario)
-          // this.listadoDefinitivo.push(this.otroArray[i])
-        }
+    this.listadoDefinitivo= new Array<Turno>();
+    for (var i=0;i<this.otroArray;i++){
+      var bul = this.listaTurnos.every((x:any) => this.otroArray[i].Horario != x && this.EspecialistaAMostrar.Email != x.EspecialistaEmail);
+      console.log(this.otroArray[i]);
+      if (bul==true){
+        console.log(this.otroArray[i]);
+        this.listadoDefinitivo.push(this.otroArray[i])
       }
     }
+    
+   
+    // for (var i=0;i<this.otroArray.length;i++){
+    //   for (var j=0;j<this.listaTurnos.length;j++){
+       
+    //     if (this.otroArray[i]!= this.listaTurnos[j].Horario && this.EspecialistaAMostrar.Email!=this.listaTurnos[j].EspecialistaEmail)
+    //     {
+    //       // console.log(this.otroArray[i] + " " + this.listaTurnos[j].Horario)
+    //       this.listadoDefinitivo.push(this.otroArray[i])
+    //     }
+    //     if (this.otroArray[i]== this.listaTurnos[j].Horario && this.EspecialistaAMostrar.Email==this.listaTurnos[j].EspecialistaEmail)
+    //     {
+    //       console.log(this.otroArray[i] + " " + this.listaTurnos[j].Horario)
+    //       // this.listadoDefinitivo.push(this.otroArray[i])
+    //     }
+    //   }
+    // }
    console.log(this.listadoDefinitivo);
   }
 

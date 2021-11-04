@@ -10,19 +10,15 @@ import { IngresarService } from 'src/app/Servicios/ingresar.service';
   templateUrl: './buttons-especialistas.component.html',
   styleUrls: ['./buttons-especialistas.component.css']
 })
-// , ControlValueAccessor
+
 export class ButtonsEspecialistasComponent implements OnInit {
-  // @Input() public formulario!: FormGroup;
-  // public form!: FormGroup;
+
   @Output() eventoEspecialistaSeleccionado : EventEmitter<Usuario> = new EventEmitter<Usuario>();
-  // @Input()
-  // EspecialistaAMostrar: any = "";
-  // @Input()
-  // EspecialidadAMostrar!: Especialidad;
+ 
   public listadoEspecialistas:any = [];
   public listaEspecialistas:any = [];
-  // public Especialista:any;
-  constructor(public ingresarService: IngresarService,private rootFormGroup: FormGroupDirective) { 
+
+  constructor(public ingresarService: IngresarService) { 
     this.listadoEspecialistas = this.ingresarService.db.collection("usuarios", ref => ref.where('TipoUsuario', '==', 'Especialista'));
     this.buscarEspecialistas();
   }

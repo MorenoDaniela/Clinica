@@ -1,38 +1,48 @@
 <nav class="navbar navbar-light bg-danger sticky-top" >
-    <div class="container-fluid">
-      <a class="navbar-brand" >
+    <div class="container-fluid" >
+      <a class="navbar-brand" style="color: white;" >
         <img src="../../../assets/clinica.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
         Clínica
       </a>
-      <a class="navbar-brand" *ngIf="!isLogued" (click)="Login()">        
+      <a class="navbar-brand" style="color: white;" *ngIf="!isLogued" (click)="Login()">        
         Login
       </a>
-      <a class="navbar-brand" *ngIf="isLogued" (click)="MiPerfil()">        
+      <a class="navbar-brand" style="color: white;" *ngIf="isLogued" (click)="MiPerfil()">        
         Mi Perfil
       </a>
-      <a class="navbar-brand" *ngIf="isLogued && isPaciente" (click)="MisTurnosPaciente()">        
+      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isPaciente" (click)="MisTurnosPaciente()">        
         Mis Turnos
       </a>
-      <a class="navbar-brand" *ngIf="isLogued && isAdmin" (click)="MisTurnosAdministrador">        
+      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isAdmin" (click)="MisTurnosAdministrador()">        
+        Turnos
+      </a>
+      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isEspecialista" (click)="MisTurnosEspecialista()">        
         Mis Turnos
       </a>
-      <a class="navbar-brand" *ngIf="isLogued && isEspecialista" (click)="MisTurnosEspecialista()">        
-        Mis Turnos
-      </a>
-      <a class="navbar-brand" *ngIf="isLogued && isAdmin || isPaciente" (click)="SolicitarTurno()">        
+      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isAdmin || isPaciente" (click)="SolicitarTurno()">        
         Solicitar Turno
       </a>
-      <a class="navbar-brand" *ngIf="isLogued && isAdmin || !isLogued" (click)="RegistroPyE()">       
+      
+
+      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isEspecialista" (click)="HistoriaClinicaEspecialista()">        
+        Historia Clinica
+      </a>
+      <!-- TODO: Analizar si va en seccion usuarios de aca otro componente que lo tiene o tiene un boton-->
+      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isAdmin" (click)="HistoriaClinicaAdministrador()">        
+        Historia Clinica
+      </a>
+
+      <a class="navbar-brand" style="color: white;"  *ngIf="isLogued && isAdmin || !isLogued" (click)="RegistroPyE()">       
         Registro
       </a>
      
-        <a  appHideShowNav *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="AltaUsuario()">       
+        <a appHideShowNav *ngIf="isLogued && isAdmin" style="color: white;" class="navbar-brand" (click)="AltaUsuario()">       
             Registro Administradores
           </a>
-          <a  appHideShowNav *ngIf="isLogued && isAdmin" class="navbar-brand" (click)="ListaEspecialistas()">       
+          <a appHideShowNav *ngIf="isLogued && isAdmin" style="color: white;" class="navbar-brand" (click)="ListaEspecialistas()">       
             Lista Especialistas
           </a>
-          <a *ngIf="isLogued" class="navbar-brand" (click)="Salir()">       
+          <a *ngIf="isLogued" class="navbar-brand" style="color: white;" (click)="Salir()">       
             Salir
           </a>
     </div>

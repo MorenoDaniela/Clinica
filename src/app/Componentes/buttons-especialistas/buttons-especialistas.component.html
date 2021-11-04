@@ -1,9 +1,4 @@
 
-
-<!-- <div [formGroup]="formulario">
-    
-    [formControlName]="Especialista"
-</div> -->
 <div class="text-center d-inline-block" *ngFor="let especialista of listaEspecialistas"  (click)="emitirEspecialista(especialista)" >
     <button class="btn-outline-danger mr-1" type="button"style="border-radius: 2px;" >
         <img src="{{especialista.ImagenUno}}" class="image" style="width: 160px; height: 90px; " > 

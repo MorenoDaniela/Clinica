@@ -2,6 +2,7 @@ import { Component, OnInit, SimpleChanges } from '@angular/core';
 import { map } from 'rxjs/operators';
 import { Turno } from 'src/app/Clases/turno';
 import { IngresarService } from 'src/app/Servicios/ingresar.service';
+import { ToasterService } from 'src/app/Servicios/toaster.service';
 import { TurnosService } from 'src/app/Servicios/turnos.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class MisTurnosAdministradorComponent implements OnInit {
   public user!:any;
   public listadoTurnos:any = [];
   public listaTurnos:any = [];
-  constructor(public turnosService: TurnosService, public ingresarService: IngresarService) { }
+  constructor(public turnosService: TurnosService, public ingresarService: IngresarService, public toaster:ToasterService) { }
 
   ngOnInit(): void {
     this.user = this.ingresarService.getItemLocal();
@@ -61,7 +62,12 @@ export class MisTurnosAdministradorComponent implements OnInit {
     console.log(this.listaTurnos);
   }
   UpdateEstadoYComentario(id:string, estado:string, comentario:string){
-    this.turnosService.UpdateEstadoTurnoYComentario(id,estado,comentario);
+    console.log("adentro de update"+comentario);
+    if (comentario == undefined){
+      this.toaster.showError("Debe ingresar comentario para poder proseguir","Error",3000);
+    }else{
+      this.turnosService.UpdateEstadoTurnoYComentario(id,estado,comentario);
+    }
   }
   UpdateEstado(id:string, estado:string){
     this.turnosService.UpdateEstadoTurno(id,estado);

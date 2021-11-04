@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       { 
         const user = new Usuario();
         user.Email = us.payload.doc.data().Email;
-        console.log(user.Email);
+        // console.log(user.Email);
         user.Password = us.payload.doc.data().Password;
         user.ImagenUno = us.payload.doc.data().ImagenUno;
         user.Nombre = us.payload.doc.data().Nombre;

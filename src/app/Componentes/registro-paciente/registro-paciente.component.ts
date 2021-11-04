@@ -23,11 +23,11 @@ export class RegistroPacienteComponent implements OnInit {
   downloadableURL2 = '';                       
   task!: AngularFireUploadTask;
   progressValue!: Observable<any>;
-
+  public captchaResolved = false;
 
   constructor(public routes: Router, public authService: IngresarService, public fb: FormBuilder, private fireStorage: AngularFireStorage, public toastr: ToasterService,public especialidades: EspecialidadesService)
    {
-
+    
   }
 //,{ validator: this.validar }
   ngOnInit(): void {
@@ -50,7 +50,7 @@ export class RegistroPacienteComponent implements OnInit {
       Imagen1:["", Validators.required],
       Imagen2:["",Validators.required ],
       Contraseña:["", Validators.required],
-      
+      reCaptcha:['',Validators.required]
     })
   }
 

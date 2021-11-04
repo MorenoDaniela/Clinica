@@ -1,13 +1,4 @@
-
-
-
-<!-- <h5>Turnos disponibles</h5>
-<div class="d-inline-block" *ngFor="let turno of listadoDefinitivo" (click)="emitirTurno(turno)" >  
-    <button class="btn-sm btn-success" style="margin-right: 5px;height: 50px;width: 120px;"  type="button" >{{turno}} </button>        
-</div> -->
-
-
 <h5>Turnos disponibles</h5>
-<div class="d-inline-block" *ngFor="let turno of otroArray" (click)="emitirTurno(turno)" >  
-    <button class="btn-sm btn-success" style="margin-right: 5px;height: 50px;width: 120px;"  type="button" >{{turno}} </button>        
+<div class="d-inline-block" *ngFor="let turno of otroArray | filterTurnos : turno" (click)="emitirTurno(turno)" >  
+    <button class="btn-sm btn-success" style="margin-right: 5px;height: 50px;width: 120px;"  type="button" > {{turno}}</button>
 </div>

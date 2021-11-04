@@ -14,10 +14,11 @@ export class HideShowNavDirective {
     console.log(user);
     if(user!=null )
     {
-      this.isAdmin = true;
+      
       el.nativeElement.style.display = 'none';
       if (user.TipoUsuario == "Administrador")
       {
+        this.isAdmin = true;
         el.nativeElement.style.display = 'block';
         this.isLogued=true;
       }

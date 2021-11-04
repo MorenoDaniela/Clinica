@@ -37,6 +37,14 @@ import { DetalleDiaHoraComponent } from './Componentes/detalle-dia-hora/detalle-
 import { FilterPipe } from './filter.pipe';
 import { FilterEspecialistaPipe } from './filter-especialista.pipe';
 import { MisTurnosAdministradorComponent } from './Componentes/mis-turnos-administrador/mis-turnos-administrador.component';
+import { FilterTurnosPipe } from './filter-turnos.pipe';
+import { RecaptchaModule, RecaptchaFormsModule, RECAPTCHA_SETTINGS } from 'ng-recaptcha';
+import { AltaHistoriaClinicaComponent } from './Componentes/alta-historia-clinica/alta-historia-clinica.component';
+import { HistoriaClinicaPacientesComponent } from './Componentes/historia-clinica-pacientes/historia-clinica-pacientes.component';
+import { HistoriaClinicaAdministradoresComponent } from './Componentes/historia-clinica-administradores/historia-clinica-administradores.component';
+import { HistoriaClinicaEspecialistasComponent } from './Componentes/historia-clinica-especialistas/historia-clinica-especialistas.component';
+import { ButtonIntermedioComponent } from './Componentes/button-intermedio/button-intermedio.component';
+
 
 @NgModule({
   declarations: [
@@ -65,7 +73,13 @@ import { MisTurnosAdministradorComponent } from './Componentes/mis-turnos-admini
     DetalleDiaHoraComponent,
     FilterPipe,
     FilterEspecialistaPipe,
-    MisTurnosAdministradorComponent
+    MisTurnosAdministradorComponent,
+    FilterTurnosPipe,
+    AltaHistoriaClinicaComponent,
+    HistoriaClinicaPacientesComponent,
+    HistoriaClinicaAdministradoresComponent,
+    HistoriaClinicaEspecialistasComponent,
+    ButtonIntermedioComponent
   ],
   imports: [
     BrowserModule,
@@ -77,9 +91,16 @@ import { MisTurnosAdministradorComponent } from './Componentes/mis-turnos-admini
     AngularFirestoreModule,
     HttpClientModule,
     ToastrModule.forRoot(),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    RecaptchaModule,
+    RecaptchaFormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: RECAPTCHA_SETTINGS,
+      useValue: {siteKey:'6LdVRwsdAAAAAD0LkkzBINpLPA9ThL7-P9-I5NSd'}
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

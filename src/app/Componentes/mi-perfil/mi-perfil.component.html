@@ -125,6 +125,10 @@
                 
             </div>
         </div>
+
+        <div class="col-md-4" *ngIf="user.TipoUsuario=='Paciente' ">
+<app-historia-clinica-pacientes></app-historia-clinica-pacientes>
+        </div>
     </div>
 </div>
 <!-- </div>

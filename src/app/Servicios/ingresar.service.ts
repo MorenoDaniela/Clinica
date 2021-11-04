@@ -78,7 +78,7 @@ export class IngresarService{
       this.Especialidad = us.payload.doc.data().Especialidad;
       this.verificado = result.user?.emailVerified;
       this.Edad = us.payload.doc.data().Edad;
-      console.log("verificado: "+ this.verificado);
+      // console.log("verificado: "+ this.verificado);
       if (this.tipoUsuario=="Administrador" || (this.verificado && this.tipoUsuario=="Paciente") || 
       (this.verificado && this.tipoUsuario=="Especialista" && this.estaAprobado==true))
       {
@@ -96,9 +96,12 @@ export class IngresarService{
         this.Usuario.ImagenUno=this.ImagenUno;
         this.Usuario.ObraSocial=this.ObraSocial;
         this.Usuario.Especialidad=this.Especialidad;
-        localStorage.setItem('usuarioApp',JSON.stringify(this.Usuario));                        
-        this.toastr.showExito("Logueo exitoso.","Te logueaste", 3000);                
+        console.log(this.Usuario.Email);
+        localStorage.setItem('usuarioApp',JSON.stringify(this.Usuario));
+        // console.log('dsps de set',this.getItemLocal());                      
+                       
         this.router.navigate(['bienvenido']);
+        this.toastr.showExito("Logueo exitoso.","Te logueaste", 3000); 
       }
       else
       {     
