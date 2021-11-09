@@ -1,0 +1,18 @@
+<!-- <div class="btn-group-fab active" id="menu" role="group"  aria-label="FAB Menu" >
+    <div >
+      <button type="button" style="background-image: url({{us.ImagenUno}}); background-size: cover;
+            width: 70px;
+            height: 70px;" class="btn btn-sub has-tooltip" data-placement="left"*ngFor="let us of listaUsuarios; index as i" ><span style="color: azure;">{{us.Nombre}}</span> </button> 
+  
+    </div>
+  </div> -->
+  <button class="kc_fab_main_btn btn-hover" click="abrirMenu()" style="margin:2px;background-size: cover;
+  width: 70px;
+  height: 70px;" (click)="abrirMenu()" >Usuarios</button>
+  <div id="menu" class="d-none" >
+    <button class="kc_fab_main_btn btn-hover" style="margin:2px; background-image: url({{us.ImagenUno}}); background-size: cover;
+  width: 70px;
+  height: 70px;" 
+  *ngFor="let us of listaUsuarios; index as i" (click)="emitirUser(us)"><span>{{us.Nombre}}</span></button>
+  </div>
+  

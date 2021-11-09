@@ -44,6 +44,10 @@ import { HistoriaClinicaPacientesComponent } from './Componentes/historia-clinic
 import { HistoriaClinicaAdministradoresComponent } from './Componentes/historia-clinica-administradores/historia-clinica-administradores.component';
 import { HistoriaClinicaEspecialistasComponent } from './Componentes/historia-clinica-especialistas/historia-clinica-especialistas.component';
 import { ButtonIntermedioComponent } from './Componentes/button-intermedio/button-intermedio.component';
+import { UsuariosFavButtonComponent } from './Componentes/usuarios-fav-button/usuarios-fav-button.component';
+import { CardTurnoComponent } from './Componentes/card-turno/card-turno.component';
+import { FilterTurnoByPacienteEmailPipe } from './filter-turno-by-paciente-email.pipe';
+import { HistoriaParaMostrarComponent } from './Componentes/historia-para-mostrar/historia-para-mostrar.component';
 
 
 @NgModule({
@@ -79,7 +83,11 @@ import { ButtonIntermedioComponent } from './Componentes/button-intermedio/butto
     HistoriaClinicaPacientesComponent,
     HistoriaClinicaAdministradoresComponent,
     HistoriaClinicaEspecialistasComponent,
-    ButtonIntermedioComponent
+    ButtonIntermedioComponent,
+    UsuariosFavButtonComponent,
+    CardTurnoComponent,
+    FilterTurnoByPacienteEmailPipe,
+    HistoriaParaMostrarComponent
   ],
   imports: [
     BrowserModule,

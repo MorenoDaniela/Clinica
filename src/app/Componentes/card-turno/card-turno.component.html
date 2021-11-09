@@ -1,0 +1,41 @@
+<!-- <div *ngFor="let historia of listaDefinitiva">
+    <div class="card" style="width: 18rem;"  >
+        <div class="card-body">
+          <h5 class="card-title">Turno</h5>
+          <p class="card-text">Fecha {{historia.Turno.Horario}}</p>
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">Especialidad {{historia.Turno.Especialidad}}</li>
+          <li class="list-group-item">Reseña {{historia.Turno.Comentario}}</li>
+        </ul>
+        <div class="card-body">
+          <a class="card-link">Historia clinica</a>
+        </div>
+      </div>
+</div> -->
+<br>
+<div class="row" >
+  <div class="col-6" *ngFor="let historia of listaDefinitiva">
+    <div class="card mb-4 rounded-3 shadow-sm border-danger">
+      <div class="card-header py-3 text-white bg-danger border-danger">
+        <h4 class="my-0 fw-normal">Turno</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{historia.Turno.Horario}}<small class="text-muted fw-light">-Fecha</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Especialidad {{historia.Turno.Especialidad}}</li>
+          <li>Reseña {{historia.Turno.Comentario}}</li>
+          <!-- <li>Phone and email support</li>
+          <li>Help center access</li> -->
+        </ul>
+        <button type="button" class="w-100 btn btn-lg btn-danger" (click)="emitirHistoria(historia)" >Historia clinica</button>
+      </div>
+    </div>
+  </div>
+  
+  <!-- <div class="col-6">
+    
+  </div> -->
+</div>
+
+

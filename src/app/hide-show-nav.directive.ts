@@ -14,7 +14,6 @@ export class HideShowNavDirective {
     console.log(user);
     if(user!=null )
     {
-      
       el.nativeElement.style.display = 'none';
       if (user.TipoUsuario == "Administrador")
       {

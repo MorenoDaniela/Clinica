@@ -4,46 +4,86 @@
         <img src="../../../assets/clinica.png" alt="" width="30" height="24" class="d-inline-block align-text-top">
         Clínica
       </a>
-      <a class="navbar-brand" style="color: white;" *ngIf="!isLogued" (click)="Login()">        
-        Login
-      </a>
-      <a class="navbar-brand" style="color: white;" *ngIf="isLogued" (click)="MiPerfil()">        
-        Mi Perfil
-      </a>
-      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isPaciente" (click)="MisTurnosPaciente()">        
-        Mis Turnos
-      </a>
-      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isAdmin" (click)="MisTurnosAdministrador()">        
-        Turnos
-      </a>
-      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isEspecialista" (click)="MisTurnosEspecialista()">        
-        Mis Turnos
-      </a>
-      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isAdmin || isPaciente" (click)="SolicitarTurno()">        
-        Solicitar Turno
-      </a>
+      <!-- ADMIN -->
       
-
-      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isEspecialista" (click)="HistoriaClinicaEspecialista()">        
-        Historia Clinica
-      </a>
       <!-- TODO: Analizar si va en seccion usuarios de aca otro componente que lo tiene o tiene un boton-->
-      <a class="navbar-brand" style="color: white;" *ngIf="isLogued && isAdmin" (click)="HistoriaClinicaAdministrador()">        
-        Historia Clinica
-      </a>
+      <ng-template [ngIf]="isLogued && isAdmin">
+        <a class="navbar-brand" style="color: white;"  (click)="MisTurnosAdministrador()">        
+          Turnos
+        </a>
+        <a  class="navbar-brand" style="color: white;"  (click)="HistoriaClinicaAdministrador()">        
+          Historia Clinica
+        </a>
+       
+      </ng-template>
 
-      <a class="navbar-brand" style="color: white;"  *ngIf="isLogued && isAdmin || !isLogued" (click)="RegistroPyE()">       
-        Registro
-      </a>
+      <ng-template [ngIf]="(isLogued && isAdmin) || !isLogued">      
+        <a  class="navbar-brand" style="color: white;"  (click)="RegistroPyE()">       
+          Registro
+        </a>
+      </ng-template>
+
+      <ng-template [ngIf]="isLogued && isAdmin">      
+        <a   style="color: white;" class="navbar-brand d-block" (click)="AltaUsuario()">       
+          Registro Administradores
+        </a>
+        <a  style="color: white;" class="navbar-brand" (click)="ListaEspecialistas()">       
+          Lista Especialistas
+        </a>
+      </ng-template>
+      
+      
+      <!-- ADMIN -->
+
+      <!-- ESPECIALISTA -->
+      <ng-template [ngIf]="isLogued && isEspecialista">      
+        <a class="navbar-brand" style="color: white;" (click)="MisTurnosEspecialista()">        
+          Mis Turnos
+        </a>
+      </ng-template>
      
-        <a appHideShowNav *ngIf="isLogued && isAdmin" style="color: white;" class="navbar-brand" (click)="AltaUsuario()">       
-            Registro Administradores
-          </a>
-          <a appHideShowNav *ngIf="isLogued && isAdmin" style="color: white;" class="navbar-brand" (click)="ListaEspecialistas()">       
-            Lista Especialistas
-          </a>
-          <a *ngIf="isLogued" class="navbar-brand" style="color: white;" (click)="Salir()">       
-            Salir
-          </a>
+      <!-- ESPECIALISTA -->
+
+      <!-- TODOS -->
+      <ng-template [ngIf]="!isLogued">      
+        <a class="navbar-brand" style="color: white;" (click)="Login()">        
+          Login
+        </a>
+      </ng-template>
+      <ng-template [ngIf]="isLogued">      
+        <a class="navbar-brand" style="color: white;" (click)="MiPerfil()">        
+          Mi Perfil
+        </a>
+      </ng-template>
+         
+       <!-- TODOS -->
+
+      <!-- PACIENTE -->
+      <ng-template [ngIf]="isLogued && isPaciente">      
+        <a class="navbar-brand" style="color: white;"  (click)="MisTurnosPaciente()">        
+          Mis Turnos
+        </a>
+      </ng-template>
+     
+      <ng-template [ngIf]="(isLogued && isAdmin) || isPaciente">      
+        <a class="navbar-brand" style="color: white;" (click)="SolicitarTurno()">        
+          Solicitar Turno
+        </a>
+      </ng-template>
+      
+      <ng-template [ngIf]="isLogued && isEspecialista">      
+        <a class="navbar-brand" style="color: white;" (click)="HistoriaClinicaEspecialista()">        
+          Pacientes
+        </a> 
+      </ng-template>
+      
+      <ng-template [ngIf]="isLogued">      
+        <a   class="navbar-brand" style="color: white;" (click)="Salir()">       
+          Salir
+        </a> 
+      </ng-template>
+
+        
+         
     </div>
   </nav>

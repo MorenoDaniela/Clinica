@@ -1,1 +1,29 @@
-<p>historia-clinica-especialistas works!</p>
+<!-- <div class="row">
+    <div *ngFor="let historia of listaHistoriaClinica">
+       <div class="col-4">
+        <div class="alert alert-success" role="alert">
+            <h4 class="alert-heading">Turno</h4>
+            <p>Su presion: {{historia.Presion}}, su peso: {{historia.Peso}}.</p>
+            <p>Datos dinámicos: {{historia.Clave1}}:{{historia.Valor1}}, {{historia.Clave2}}:{{historia.Valor2}}.</p>
+            <p>El paciente atendido fue: <b>{{historia.Turno.PacienteEmail}}</b>, para la especialidad: <b>{{historia.Turno.Especialidad}}</b>. </p>
+            <p>Reseña al respecto: <i>"{{historia.Turno.Comentario}}" </i></p>
+            
+            <hr>
+            <p class="mb-0">Fecha de la atención: <b>{{historia.Turno.Horario}}</b></p>
+          </div>
+       </div>
+    </div>
+</div>
+<p>preguntar si se listan los pacientes </p> -->
+<div class="row">
+    <div class="col-1"> 
+        <app-usuarios-fav-button (eventoUsuarioSelect)="pasoUsuarioADetalle($event)" (click)="ocultar()"></app-usuarios-fav-button>
+    </div>
+    <div class="col-6">
+    <app-card-turno [usuarioAMostrar]="usuarioSeleccionado" (eventoHistoriaSeleccionada)="pasoHistoriaADetalle($event)"></app-card-turno>
+    </div>
+    
+    <div class="col-4" *ngIf="mostrar">
+        <app-historia-para-mostrar [historiaAMostrar]="historiaSeleccionada"></app-historia-para-mostrar>
+    </div>
+</div>

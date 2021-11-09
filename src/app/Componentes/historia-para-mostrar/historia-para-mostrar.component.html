@@ -1,0 +1,30 @@
+<br>
+<!-- <div >
+    <div class="row">
+  
+        <div class="col-6">
+         
+        </div>
+    </div>
+</div> -->
+
+<div class="row" *ngIf="historiaAMostrar.Clave1!=''">
+    <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm border-danger">
+            <div class="card-header py-3 text-white bg-danger border-danger">
+              <h4 class="my-0 fw-normal">Historia</h4>
+            </div>
+            <div class="card-body">
+              <h1 class="card-title pricing-card-title">Altura:<small class="text-muted fw-light">{{historiaAMostrar.Altura}}</small></h1>
+              <ul class="list-unstyled mt-3 mb-4">
+                <li>Peso {{historiaAMostrar.Peso}}</li>
+                <li>Temperatura {{historiaAMostrar.Temperatura}}</li>
+                <li>Presión {{historiaAMostrar.Presion}}</li>
+                <li>{{historiaAMostrar.Clave1}} : {{historiaAMostrar.Valor1}}</li>
+              </ul>
+              <!-- <button type="button" class="w-100 btn btn-lg btn-danger">Historia clinica</button> -->
+            </div>
+          </div>   
+    </div>
+    
+</div>

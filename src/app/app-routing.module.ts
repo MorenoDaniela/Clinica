@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AltaHistoriaClinicaComponent } from './Componentes/alta-historia-clinica/alta-historia-clinica.component';
 import { BienvenidoComponent } from './Componentes/bienvenido/bienvenido.component';
+import { HistoriaClinicaEspecialistasComponent } from './Componentes/historia-clinica-especialistas/historia-clinica-especialistas.component';
 import { IndexRegistroComponent } from './Componentes/index-registro/index-registro.component';
 import { ListaEspecialidadComponent } from './Componentes/lista-especialidad/lista-especialidad.component';
 import { ListaEspecialistasComponent } from './Componentes/lista-especialistas/lista-especialistas.component';
@@ -14,6 +15,7 @@ import { RegistroPacienteComponent } from './Componentes/registro-paciente/regis
 import { RegistroComponent } from './Componentes/registro/registro.component';
 import { SolicitarTurnoComponent } from './Componentes/solicitar-turno/solicitar-turno.component';
 import { VerificarEmailComponent } from './Componentes/verificar-email/verificar-email.component';
+import { EspecialistasModule } from './especialistas/especialistas.module';
 import { PuedoVerPacienteYAdminGuard } from './puedo-ver-paciente-yadmin.guard';
 import { PuedoVerGuard } from './puedo-ver.guard';
 import { UsuariosModule } from './usuarios/usuarios.module';
@@ -33,7 +35,9 @@ const routes: Routes = [
   {path: 'MisTurnosEspecialista',component:MisTurnosEspecialistaComponent},
   {path: 'MisTurnosAdministrador',component:MisTurnosAdministradorComponent,canActivate:[PuedoVerGuard]},
   {path: 'AltaHistoriaClinica/:turnito',component:AltaHistoriaClinicaComponent},
+ {path: 'HistoriaClinicaEspecialista',component:HistoriaClinicaEspecialistasComponent},
   {path: 'Usuarios', loadChildren:()=>import('./usuarios/usuarios.module').then(m => UsuariosModule), canActivate:[PuedoVerGuard]},
+  {path: 'Pacientes', loadChildren:()=>import('./especialistas/especialistas.module').then(m => EspecialistasModule)},
 ];
 
 @NgModule({
