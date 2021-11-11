@@ -48,7 +48,14 @@ import { UsuariosFavButtonComponent } from './Componentes/usuarios-fav-button/us
 import { CardTurnoComponent } from './Componentes/card-turno/card-turno.component';
 import { FilterTurnoByPacienteEmailPipe } from './filter-turno-by-paciente-email.pipe';
 import { HistoriaParaMostrarComponent } from './Componentes/historia-para-mostrar/historia-para-mostrar.component';
-
+import { CardTurnoAdminComponent } from './Componentes/card-turno-admin/card-turno-admin.component';
+import { BajarPdfComponent } from './Componentes/bajar-pdf/bajar-pdf.component';
+// import { ChartComponent } from './Componentes/chart/chart.component';
+// import { ChartsModule } from "ng2-charts/ng2-charts";
+// import { ChartsModule } from 'ng2-charts';
+import { AgrandaDirective } from './directivas/agranda.directive';
+import { HighlightDirective } from './directivas/highlight.directive';
+import { PosicionDirective } from './directivas/posicion.directive';
 
 @NgModule({
   declarations: [
@@ -87,7 +94,12 @@ import { HistoriaParaMostrarComponent } from './Componentes/historia-para-mostra
     UsuariosFavButtonComponent,
     CardTurnoComponent,
     FilterTurnoByPacienteEmailPipe,
-    HistoriaParaMostrarComponent
+    HistoriaParaMostrarComponent,
+    CardTurnoAdminComponent,
+    BajarPdfComponent,
+    AgrandaDirective,
+    HighlightDirective,
+    PosicionDirective
   ],
   imports: [
     BrowserModule,
@@ -102,6 +114,7 @@ import { HistoriaParaMostrarComponent } from './Componentes/historia-para-mostra
     BrowserAnimationsModule,
     RecaptchaModule,
     RecaptchaFormsModule,
+    // ChartsModule
   ],
   providers: [
     {

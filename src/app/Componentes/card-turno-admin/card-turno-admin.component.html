@@ -1,0 +1,38 @@
+<!-- <br>
+<div class="row" >
+  <div class="col-6" *ngFor="let turno of listaDefinitiva">
+    <div class="card mb-4 rounded-3 shadow-sm border-danger">
+      <div class="card-header py-3 text-white bg-danger border-danger">
+        <h4 class="my-0 fw-normal">Turno</h4>
+      </div>
+      <div class="card-body">
+        <h1 class="card-title pricing-card-title">{{turno.Horario}}<small class="text-muted fw-light">-Fecha</small></h1>
+        <ul class="list-unstyled mt-3 mb-4">
+          <li>Especialidad {{turno.Especialidad}}</li>
+          <li>Especialista {{turno.EspecialistaEmail}}</li>
+          <li>Estado {{turno.Estado}}</li>
+          
+        </ul>
+        <button type="button" class="w-100 btn btn-lg btn-danger" >Descargar turnos</button>
+      </div>
+    </div>
+  </div> -->
+  <br>
+  <table id="excel-table" hidden> 
+    <tr>       
+       <th>Fecha</th> 
+       <th>Especialidad</th>  
+       <th> Especialista</th> 
+    </tr>    
+    <tr *ngFor="let turno of listaDefinitiva">
+    
+       <td>{{ turno.Horario }}</td>  
+       <td>{{ turno.Especialidad }}</td> 
+       <td>{{ turno.EspecialistaEmail }}</td>  
+    </tr> 
+</table>
+
+
+<button *ngIf="mostrar" class="btn btn-danger" (click)="exportexcel()"> Descargar Excel</button> 
+
+  

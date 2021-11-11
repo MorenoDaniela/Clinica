@@ -1,4 +1,4 @@
-<div *ngFor="let historia of listaHistoriaClinica">
+<!-- <div *ngFor="let historia of listaHistoriaClinica">
     <div class="alert alert-success" role="alert">
         <h4 class="alert-heading">Turno</h4>
         <p>Su presion: {{historia.Presion}}, su peso: {{historia.Peso}}.</p>
@@ -9,4 +9,31 @@
         <hr>
         <p class="mb-0">Fecha de la atención: <b>{{historia.Turno.Horario}}</b></p>
       </div>
+</div> -->
+
+<br>
+<div class="col"id="pdfTable" #pdfTable> 
+  <!-- hidden -->
+  <h1 >Clinica Moreno Daniela
+    <img src="../../../assets/clinica.png" style="height: 25px;width: 25px;">
+  </h1>
+ <h5>Mis turnos</h5>
+  <table class="table table-bordered" > 
+    <tr class="table-primary">       
+       <th>Fecha</th> 
+       <th>Especialidad</th>  
+       <th>Especialista</th>
+       <th>Reseña</th>
+    </tr>    
+    <tr *ngFor="let historia of listaHistoriaClinica" appAgranda>
+    
+       <td>{{  historia.Turno.Horario  }}</td>  
+       <td>{{ historia.Turno.Especialidad }}</td> 
+       <td>{{ historia.Turno.EspecialistaEmail }}</td>
+       <td>{{  historia.Turno.Comentario  }}</td>
+    </tr> 
+  </table>
 </div>
+<button type="button" class="btn btn-danger" appPosicion (click)="crearPdf()"> Descargar pdf con mis turnos</button> 
+<!-- 
+*ngIf="mostrar" -->

@@ -2,19 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { map } from 'rxjs/operators';
 import { Horario } from 'src/app/Clases/horario';
+import { Turno } from 'src/app/Clases/turno';
+import { Usuario } from 'src/app/Clases/usuario';
 import { IngresarService } from 'src/app/Servicios/ingresar.service';
 import { MisHorariosService } from 'src/app/Servicios/mis-horarios.service';
 import { ToasterService } from 'src/app/Servicios/toaster.service';
+import jsPDF from 'jspdf'
+import autoTable from 'jspdf-autotable'
+import { async } from '@firebase/util';
+import { trigger, transition, animate, style, state} from '@angular/animations';
+
 
 @Component({
   selector: 'app-mi-perfil',
   templateUrl: './mi-perfil.component.html',
-  styleUrls: ['./mi-perfil.component.css']
+  styleUrls: ['./mi-perfil.component.css'],
+  animations: [
+    trigger('fadeInOut', [
+      state('void', style({
+        opacity: 0
+      })),
+      transition('void <=> *', animate(1000)),
+    ]),
+    trigger('EnterLeave', [
+      state('flyIn', style({ transform: 'translateX(0)' })),
+      transition(':enter', [
+        style({ transform: 'translateX(-100%)' }),
+        animate('0.5s 300ms ease-in')
+      ]),
+      transition(':leave', [
+        animate('0.3s ease-out', style({ transform: 'translateX(100%)' }))
+      ])
+    ])
+  ]
 })
 export class MiPerfilComponent implements OnInit {
-
- 
+  public visible:boolean=true;
+  public EspecialistaSeleccionado!: Usuario;
   isAdmin!:boolean;
   user!:any;
   formulario!: FormGroup;
@@ -89,6 +115,14 @@ export class MiPerfilComponent implements OnInit {
   this.toastr.showExito("Se registraron sus horarios con exito","Tus datos fueron enviados con exito.",2000);
   
   }
-  
+  async pasoEspecialistaADetalle(event:any)
+  {
+    console.log(event);
+    this.EspecialistaSeleccionado=event;
+     
+    
+  }
+
+
 
 }

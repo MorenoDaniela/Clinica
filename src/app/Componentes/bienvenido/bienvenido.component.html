@@ -5,8 +5,13 @@
      <img src="../../../assets/hopistal.jpg" alt="HOSPITAL" style="height: 390%;width: 90%;">
      <button class="btn">Button</button>
    </div> -->
-   <div class="container">
-     <img src="../../../assets/hopistal.jpg" alt="HOSPITAL" style="height: 450%;width: 91%;">
-     <button class="centered btn btn-danger" (click)="Login()">Login</button>
-     
-   </div>
+  
+
+   
+<div *ngIf="visible" [@slideInOut]>
+ <div class="container">
+    <img src="../../../assets/hopistal.jpg" alt="HOSPITAL" style="height: 450%;width: 91%;">
+    <button class="centered btn btn-danger" (click)="Login()">Login</button>
+    
+  </div>
+</div>

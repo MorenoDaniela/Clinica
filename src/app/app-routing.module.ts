@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AltaHistoriaClinicaComponent } from './Componentes/alta-historia-clinica/alta-historia-clinica.component';
 import { BienvenidoComponent } from './Componentes/bienvenido/bienvenido.component';
+import { ChartComponent } from './Componentes/chart/chart.component';
 import { HistoriaClinicaEspecialistasComponent } from './Componentes/historia-clinica-especialistas/historia-clinica-especialistas.component';
 import { IndexRegistroComponent } from './Componentes/index-registro/index-registro.component';
 import { ListaEspecialidadComponent } from './Componentes/lista-especialidad/lista-especialidad.component';
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'MisTurnosAdministrador',component:MisTurnosAdministradorComponent,canActivate:[PuedoVerGuard]},
   {path: 'AltaHistoriaClinica/:turnito',component:AltaHistoriaClinicaComponent},
  {path: 'HistoriaClinicaEspecialista',component:HistoriaClinicaEspecialistasComponent},
+ {path: 'chart', component:ChartComponent},
   {path: 'Usuarios', loadChildren:()=>import('./usuarios/usuarios.module').then(m => UsuariosModule), canActivate:[PuedoVerGuard]},
   {path: 'Pacientes', loadChildren:()=>import('./especialistas/especialistas.module').then(m => EspecialistasModule)},
 ];
